@@ -46,6 +46,8 @@ class Relationship(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
+        return "<Relationship rel_id=%s char1=%s char2=%s>" % (self.rel_id, self.char1, self.char2)
+
 
 
 class Series(db.Model):
@@ -61,6 +63,7 @@ class Series(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
+        return "<Series series_id=%s series_name=%s>" % (self.series_id, self.series_name)
 
 
 
@@ -84,6 +87,8 @@ class User(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
+        return "<User user_id=%s user_email=%s>" % (self.user_id, self.user_email)
+
 
 
 class CharacterSeries(db.Model):
@@ -93,12 +98,12 @@ class CharacterSeries(db.Model):
 
     appearance_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     character = db.Column(db.String(50))
-    series = db.Column(db.String(80))
-    db.Column(db.String(50))
+    series = db.Column(db.String(100))
 
     def __repr__(self):
         """Provide helpful representation when printed"""
 
+        return "<Appearance character=%s series=%s>" % (self.character, self.series)
 
 
 # Middle table between Character & User
@@ -115,7 +120,7 @@ class Rating(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-
+        return "<Rating user=%s character=%s rating=%s>" % (self.user, self.character, self.rating)
 
 
 
@@ -138,4 +143,4 @@ if __name__ == "__main__":
     from server import app
 
     connect_to_db(app)
-    print "Connected to DB."
+    print "Welcome to the Whoniverse."
