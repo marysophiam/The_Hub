@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+  <body>
+
+  <h3>Characters</h3>
+  (imagine a pretty carousel...)
+
+  <ul>
+  {% for character in characters %}
+    <li>{{ character.char_name }}, {{ character.image_1 }}</li>
+  {% endfor %}
+  </ul>
+
+  <h3>Series</h3>
+  (imagine a pretty carousel...)
+
+  <ul>
+  {% for series in series %}
+    <li>{{ series.series_name }}, {{ series.image }}</li>
+  {% endfor %}
+  </ul>
+
+
+
+  </body>
+</html>
+
+<!--
+
+Alright. So what needs to go on this page?
+
+* Character names/img_url (will be in carousel eventually, list for now)
+  (alphabetical? by character type?)
+* Series names/img_url IN ORDER
+
+-->
+
+<!--
+
+The above is what I need to get displayed on here today. (5/16)
+
+Future items:
+
+* Navbar
+* Search
+* Login/acct creation
+*
+*
+
+-->

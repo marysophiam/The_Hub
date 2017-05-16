@@ -58,7 +58,9 @@ class Series(db.Model):
     series_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     series_name = db.Column(db.String(50))
     series_synopsis = db.Column(db.Text)
-    series_year = db.Column(db.DateTime)
+    # changed from DateTime to account for series which occur over multiple years
+    series_year = db.Column(db.String(10))
+    image = db.Column(db.String(100))      # Will be a link to image URL
 
     def __repr__(self):
         """Provide helpful representation when printed"""
