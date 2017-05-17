@@ -22,9 +22,50 @@ class Character(db.Model):
     char_summary = db.Column(db.Text)
     image_1 = db.Column(db.String(100))      # Will be a link to image URL
 
-    # May add another image or 2 later depending on layout
-    # Will require dropping db & reseeding
-    # Discussed w/ Kiko 5/10 @ 12:15p
+    # May add another image or 2 later depending on layout?
+
+    @classmethod
+    def by_id(cls, char_id):
+        q = cls.query.filter_by(char_id=char_id)
+        c = q.first()
+        return c
+
+    @classmethod
+    def by_ids(cls, char_ids):
+        q = cls.query.filter(cls.char_id.in_(char_ids))
+        return q.all()
+
+   
+    @classmethod
+    def all(cls):
+        q = cls.query
+        return q.all()
+
+    @classmethod
+    def new(cls, name, actor, summary, image):
+        # c = create obj
+        # c.insert()
+        return c
+
+
+    def relationships(self):
+        # find relationships
+        q = Relationship.query
+        q.filter((Relationship.char1 == self.char_id) | 
+                 (Relationship.char2 == self.char_id))
+        
+        # build list of char_id's
+        char_ids = []
+        for rel in q.all():
+            char_ids.extend((rel.char1, rel.char2))
+        char_ids = set(char_ids)
+
+        # look up characters
+        chars = Character.by_ids(char_ids)
+        # remove myself
+        chars = [c for c in chars if c.char_id != self.char_id]
+
+        return chars
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -42,14 +83,6 @@ class Relationship(db.Model):
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char1 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     char2 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
-
-    # This use of "relationship" (below) refers to a table relationship for data modeling;
-    # Doesn't specifically refer to a Whoniverse relationship.
-
-    # 5/16, 5:30pm: Currently working this out...Need to figure out error
-    # Continue w/ Dennis tomorrow
-
-    characters = db.relationship('Character', primaryjoin='db.or_(Character.char_id==Relationship.char1, Character.char_id==Relationship.char2)',foreign_keys=[char1, char2])
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -69,6 +102,13 @@ class Series(db.Model):
     # changed from DateTime to account for series which occur over multiple years
     series_year = db.Column(db.String(10))
     image = db.Column(db.String(100))      # Will be a link to image URL
+
+
+    @classmethod
+    def all(cls):
+        q = cls.query
+        return q.all()
+
 
     def __repr__(self):
         """Provide helpful representation when printed"""

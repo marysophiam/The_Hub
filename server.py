@@ -1,9 +1,9 @@
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, abort
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, Character, Relationship, Series, User, CharacterSeries, Rating
+from model import connect_to_db, Character, Relationship, Series, User, CharacterSeries, Rating
     # and also other classes once they're worked out?
 
 
@@ -20,8 +20,8 @@ app.jinja_env.undefined = StrictUndefined
 def display_index():
     """Display index template."""
 
-    characters = Character.query.all()
-    series = Series.query.all()
+    characters = Character.all()
+    series = Series.all()
 
     return render_template("index.html",
                             characters=characters,
@@ -32,7 +32,7 @@ def display_index():
 def display_characters():
     """Display character info template."""
 
-    characters = Character.query.all()
+    characters = Character.all()
 
     return render_template("characters.html",
                             characters=characters)
@@ -44,28 +44,18 @@ def show_character():
     """Display character info template."""
 
     character_id = request.args.get("character")
+    character = Character.by_id(character_id)
 
-    character = Character.query.filter_by(char_id=character_id).first()
-
-    relationships = Relationship.query.filter((Relationship.char1 == character_id) | (Relationship.char2 == character_id)).all()
-
-    return render_template("character.html",
-                            character=character,
-                            relationships=relationships)
-
-
-
-
+    if character:
+        relationships = character.relationships()
+        return render_template("character.html",
+                                character=character,
+                                relationships=relationships)
+    else:
+        abort(404)
 
 
     ### Need to display: Relationships, Series in
-
-
-
-
-
-
-
 
 
 # Need to make html templates, what all will I need?

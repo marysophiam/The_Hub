@@ -10,7 +10,10 @@
 
 <!-- 5/16 5:30pm: Working out how to get this to show up properly... -->
 
-  {{ relationships }}
+  {% for c in relationships %}
+    {{c.char_name}}
+    <br>
+  {% endfor %}
 
   </body>
 </html>
