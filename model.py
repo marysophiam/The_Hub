@@ -17,12 +17,10 @@ class Character(db.Model):
     __tablename__ = 'characters'
 
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    char_name = db.Column(db.String(50))
+    name = db.Column(db.String(50))
     actor = db.Column(db.String(50))
-    char_summary = db.Column(db.Text)
-    image_1 = db.Column(db.String(100))      # Will be a link to image URL
-
-    # May add another image or 2 later depending on layout?
+    bio = db.Column(db.Text)
+    image = db.Column(db.String(100))   # Will be a link to image URL
 
     @classmethod
     def by_id(cls, char_id):
@@ -34,7 +32,6 @@ class Character(db.Model):
     def by_ids(cls, char_ids):
         q = cls.query.filter(cls.char_id.in_(char_ids))
         return q.all()
-
    
     @classmethod
     def all(cls):
@@ -47,20 +44,23 @@ class Character(db.Model):
         # c.insert()
         return c
 
-
     def relationships(self):
         # find relationships
+
+        # GO BACK AND PLAY AROUND WITH THIS WHEN YOU HAVE A LITTLE TIME
+        # import pdb; pdb.set_trace()
+
         q = Relationship.query
-        q.filter((Relationship.char1 == self.char_id) | 
-                 (Relationship.char2 == self.char_id))
+        filter_rels = q.filter((Relationship.char1_id == self.char_id) | 
+                 (Relationship.char2_id == self.char_id)).all()
         
         # build list of char_id's
         char_ids = []
-        for rel in q.all():
-            char_ids.extend((rel.char1, rel.char2))
+        for rel in filter_rels:
+            char_ids.extend((rel.char1_id, rel.char2_id))
         char_ids = set(char_ids)
 
-        # look up characters
+        # look up characters    # characters that self is related to + self
         chars = Character.by_ids(char_ids)
         # remove myself
         chars = [c for c in chars if c.char_id != self.char_id]
@@ -70,8 +70,7 @@ class Character(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Character char_id=%s char_name=%s>" % (self.char_id, self.char_name)
-
+        return "<Character char_id=%s name=%s>" % (self.char_id, self.name)
 
 
 class Relationship(db.Model):
@@ -81,14 +80,13 @@ class Relationship(db.Model):
     __tablename__ = 'relationships'
 
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    char1 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
-    char2 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    char1_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
 
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Relationship rel_id=%s char1=%s char2=%s>" % (self.rel_id, self.char1, self.char2)
-
+        return "<Relationship rel_id=%s char1_id=%s char2_id=%s>" % (self.rel_id, self.char1_id, self.char2_id)
 
 
 class Series(db.Model):
@@ -96,25 +94,27 @@ class Series(db.Model):
 
     __tablename__ = 'series'
 
-    series_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    series_name = db.Column(db.String(50))
-    series_synopsis = db.Column(db.Text)
-    # changed from DateTime to account for series which occur over multiple years
-    series_year = db.Column(db.String(10))
-    image = db.Column(db.String(100))      # Will be a link to image URL
+    # TO DO: change some variable names to make more sense/for ease of reading
+    # name TO title
+    # synopsis TO synopsis
+    # date TO date
 
+    series_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String(50))
+    synopsis = db.Column(db.Text)
+    # changed from DateTime to account for series which occur over multiple years
+    date = db.Column(db.String(10))
+    image = db.Column(db.String(100))   # Will be a link to image URL
 
     @classmethod
     def all(cls):
         q = cls.query
         return q.all()
 
-
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Series series_id=%s series_name=%s>" % (self.series_id, self.series_name)
-
+        return "<Series series_id=%s name=%s>" % (self.series_id, self.name)
 
 
 # TO-DO: Create user account in order to rate/vote on characters
@@ -147,8 +147,8 @@ class CharacterSeries(db.Model):
     __tablename__ = 'character_series'
 
     appearance_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    character = db.Column(db.String(50))
-    series = db.Column(db.String(100))
+    character = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    series = db.Column(db.Integer, db.ForeignKey('series.series_id'))
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -171,7 +171,6 @@ class Rating(db.Model):
         """Provide helpful representation when printed"""
 
         return "<Rating user=%s character=%s rating=%s>" % (self.user, self.character, self.rating)
-
 
 
 ##############################################################################

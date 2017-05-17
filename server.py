@@ -6,8 +6,6 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, Character, Relationship, Series, User, CharacterSeries, Rating
     # and also other classes once they're worked out?
 
-
-
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -28,19 +26,21 @@ def display_index():
                             series=series)
 
 
-@app.route('/characters')
-def display_characters():
-    """Display character info template."""
+# Redundant, not needed anymore
 
-    characters = Character.all()
+# @app.route('/characters')
+# def display_characters():
+#     """Display character info template."""
 
-    return render_template("characters.html",
-                            characters=characters)
+#     characters = Character.all()
+
+#     return render_template("characters.html",
+#                             characters=characters)
 
 
-
+# Still need to display series a character appears in
 @app.route('/character')
-def show_character():
+def display_character():
     """Display character info template."""
 
     character_id = request.args.get("character")
@@ -55,14 +55,16 @@ def show_character():
         abort(404)
 
 
-    ### Need to display: Relationships, Series in
+@app.route('/series')
+def display_series():
+    """Display series info template."""
 
+    pass
+    
 
-# Need to make html templates, what all will I need?
+# What html templates do I still need?
 # -Splash
-# -Index
-# -Characters/Series (would like to use AJAX to change content w/o redirect);
-#   also, display ratings (1-5 stars) on char/series pages
+# -Voting/Quiz?
 
 
 if __name__ == "__main__":

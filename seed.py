@@ -5,37 +5,33 @@ from model import connect_to_db, db, Character, Relationship, Series, User, Char
 
 from server import app
 
+# TO DO: rename variables to match model.py renamed variables
 
 def load_test_characters():
 
-    print 'Characters'
-
     for line in open("csv/test_data/characters_test.csv"):
         line = line[:-1]
-        char_name, actor, char_summary, image_1 = line.split(',')
+        name, actor, bio, image = line.split(',')
 
-        character = Character(char_name=char_name,
+        character = Character(name=name,
                               actor=actor,
-                              char_summary=char_summary,
-                              image_1=image_1)
+                              bio=bio,
+                              image=image)
 
         db.session.add(character)
 
     db.session.commit()
 
 
-
 def load_test_series():
-
-    print 'Series'
 
     for line in open("csv/test_data/series_test.csv"):
         line = line[:-1]
-        series_name, series_synopsis, series_year, image = line.split(',')
+        name, synopsis, date, image = line.split(',')
 
-        series = Series(series_name=series_name,
-                        series_synopsis=series_synopsis,
-                        series_year=series_year,
+        series = Series(name=name,
+                        synopsis=synopsis,
+                        date=date,
                         image=image)
 
         db.session.add(series)
@@ -45,41 +41,39 @@ def load_test_series():
 
 def load_test_relationships():
 
-    print 'Relationships'
-
-    import pdb; pdb.set_trace()
     for line in open("csv/test_data/relationships_test.csv"):
         line = line[:-1]
-        char1, char2 = line.split(',')
+        char1_id, char2_id = line.split(',')
 
-        character_1 = Character.query.filter_by(char_name=char1).first()
-        character_2 = Character.query.filter_by(char_name=char2).first()
+        character_1 = Character.query.filter_by(name=char1_id).first()
+        character_2 = Character.query.filter_by(name=char2_id).first()
 
-
-        # if not Relationship.query.filter((Relationship.char1==character_1.char_id)&
-        #                                  (Relationship.char2==character_2.char_id)).all():
-
-        relationship = Relationship(char1=character_1.char_id,
-                                        char2=character_2.char_id)
+        relationship = Relationship(char1_id=character_1.char_id,
+                                    char2_id=character_2.char_id)
 
         db.session.add(relationship)
 
     db.session.commit()
 
 
+
 # Write code for all these, obviously.
+# Can just rename above functions when data is fully seeded.
 
 # def load_characters():
+#   """This will replace load_test_characters()"""
 
 #     pass
 
 
 # def load_relationships():
+#   """This will replace load_test_relationships()"""
 
 #     pass
 
 
 # def load_series():
+#   """This will replace load_test_series()"""
 
 #     pass
 
@@ -102,12 +96,11 @@ def load_test_relationships():
 #     db.session.commit()
 
 
-
 if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
-    load_test_characters()
-    load_test_series()
-    load_test_relationships()
+    load_test_characters()      # rename later
+    load_test_series()          # rename later
+    load_test_relationships()   # rename later
 
     # Run the functions (loading data, setting value of ids)
