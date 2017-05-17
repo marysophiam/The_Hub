@@ -43,15 +43,32 @@ def load_test_relationships():
 
     for line in open("csv/test_data/relationships_test.csv"):
         line = line[:-1]
-        char1_id, char2_id = line.split(',')
+        char1_name, char2_name = line.split(',')
 
-        character_1 = Character.query.filter_by(name=char1_id).first()
-        character_2 = Character.query.filter_by(name=char2_id).first()
+        character_1 = Character.query.filter_by(name=char1_name).first()
+        character_2 = Character.query.filter_by(name=char2_name).first()
 
         relationship = Relationship(char1_id=character_1.char_id,
                                     char2_id=character_2.char_id)
 
         db.session.add(relationship)
+
+    db.session.commit()
+
+
+def load_test_appearances():
+
+    for line in open("csv/test_data/char_series_test.csv"):
+        line = line[:-1]
+        char_name, series_name = line.split(',')
+
+        character = Character.query.filter_by(name=char_name).first()
+        series = Series.query.filter_by(name=series_name).first()
+
+        appearance = CharacterSeries(character=character.char_id,
+                                     series=series.series_id)
+
+        db.session.add(appearance)
 
     db.session.commit()
 
@@ -98,9 +115,11 @@ def load_test_relationships():
 
 if __name__ == "__main__":
     connect_to_db(app)
+    db.drop_all()
     db.create_all()
     load_test_characters()      # rename later
     load_test_series()          # rename later
     load_test_relationships()   # rename later
+    load_test_appearances()
 
     # Run the functions (loading data, setting value of ids)

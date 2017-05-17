@@ -48,9 +48,11 @@ def display_character():
 
     if character:
         relationships = character.relationships()
+        appearances = character.appearances
         return render_template("character.html",
                                 character=character,
-                                relationships=relationships)
+                                relationships=relationships,
+                                appearances=appearances)
     else:
         abort(404)
 
@@ -60,7 +62,7 @@ def display_series():
     """Display series info template."""
 
     pass
-    
+
 
 # What html templates do I still need?
 # -Splash

@@ -8,16 +8,20 @@
   <p><b>Portrayed by:</b> {{ character.actor }}</p>
   <p><b>Character Summary:</b> {{ character.bio }}<p>
 
-<!-- 5/16 5:30pm: Working out how to get this to show up properly... -->
 
+  <b>Has interactions with:</b><br>
   {% for c in relationships %}
     {{c.name}}
     <br>
   {% endfor %}
 
+  <br>
 
-
-
+  <b>Appears in:</b><br>
+  {% for a in appearances %}
+    {{ a.name }}
+    <br>
+    {% endfor %}
 
   </body>
 </html>

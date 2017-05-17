@@ -47,8 +47,8 @@ class Character(db.Model):
     def relationships(self):
         # find relationships
 
-        # GO BACK AND PLAY AROUND WITH THIS WHEN YOU HAVE A LITTLE TIME
-        # import pdb; pdb.set_trace()
+            # GO BACK AND PLAY AROUND WITH THIS WHEN YOU HAVE A LITTLE TIME
+            # import pdb; pdb.set_trace()
 
         q = Relationship.query
         filter_rels = q.filter((Relationship.char1_id == self.char_id) | 
@@ -66,6 +66,13 @@ class Character(db.Model):
         chars = [c for c in chars if c.char_id != self.char_id]
 
         return chars
+
+
+
+    appearances = db.relationship("Series",
+                                  secondary="character_series",
+                                  backref="characters")
+
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -94,11 +101,6 @@ class Series(db.Model):
 
     __tablename__ = 'series'
 
-    # TO DO: change some variable names to make more sense/for ease of reading
-    # name TO title
-    # synopsis TO synopsis
-    # date TO date
-
     series_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50))
     synopsis = db.Column(db.Text)
@@ -115,6 +117,21 @@ class Series(db.Model):
         """Provide helpful representation when printed"""
 
         return "<Series series_id=%s name=%s>" % (self.series_id, self.name)
+
+
+class CharacterSeries(db.Model):
+    """Association table between Character & Series."""
+
+    __tablename__ = 'character_series'
+
+    appearance_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    character = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    series = db.Column(db.Integer, db.ForeignKey('series.series_id'))
+
+    def __repr__(self):
+        """Provide helpful representation when printed"""
+
+        return "<Appearance character=%s series=%s>" % (self.character, self.series)
 
 
 # TO-DO: Create user account in order to rate/vote on characters
@@ -138,22 +155,6 @@ class User(db.Model):
         """Provide helpful representation when printed"""
 
         return "<User user_id=%s user_email=%s>" % (self.user_id, self.user_email)
-
-
-
-class CharacterSeries(db.Model):
-    """Association table between Character & Series."""
-
-    __tablename__ = 'character_series'
-
-    appearance_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    character = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
-    series = db.Column(db.Integer, db.ForeignKey('series.series_id'))
-
-    def __repr__(self):
-        """Provide helpful representation when printed"""
-
-        return "<Appearance character=%s series=%s>" % (self.character, self.series)
 
 
 # Middle table between Character & User
