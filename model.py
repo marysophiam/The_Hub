@@ -40,8 +40,16 @@ class Relationship(db.Model):
     __tablename__ = 'relationships'
 
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    char1 = db.Column(db.String(50))
-    char2 = db.Column(db.String(50))
+    char1 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    char2 = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+
+    # This use of "relationship" (below) refers to a table relationship for data modeling;
+    # Doesn't specifically refer to a Whoniverse relationship.
+
+    # 5/16, 5:30pm: Currently working this out...Need to figure out error
+    # Continue w/ Dennis tomorrow
+
+    characters = db.relationship('Character', primaryjoin='db.or_(Character.char_id==Relationship.char1, Character.char_id==Relationship.char2)',foreign_keys=[char1, char2])
 
     def __repr__(self):
         """Provide helpful representation when printed"""

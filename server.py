@@ -38,6 +38,26 @@ def display_characters():
                             characters=characters)
 
 
+
+@app.route('/character')
+def show_character():
+    """Display character info template."""
+
+    character_id = request.args.get("character")
+
+    character = Character.query.filter_by(char_id=character_id).first()
+
+    relationships = Relationship.query.filter((Relationship.char1 == character_id) | (Relationship.char2 == character_id)).all()
+
+    return render_template("character.html",
+                            character=character,
+                            relationships=relationships)
+
+
+
+
+
+
     ### Need to display: Relationships, Series in
 
 

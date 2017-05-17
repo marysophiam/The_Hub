@@ -11,6 +11,7 @@ def load_test_characters():
     print 'Characters'
 
     for line in open("csv/test_data/characters_test.csv"):
+        line = line[:-1]
         char_name, actor, char_summary, image_1 = line.split(',')
 
         character = Character(char_name=char_name,
@@ -29,6 +30,7 @@ def load_test_series():
     print 'Series'
 
     for line in open("csv/test_data/series_test.csv"):
+        line = line[:-1]
         series_name, series_synopsis, series_year, image = line.split(',')
 
         series = Series(series_name=series_name,
@@ -45,10 +47,20 @@ def load_test_relationships():
 
     print 'Relationships'
 
-    for line in open("csv_test_data/relationships_test.csv"):
+    import pdb; pdb.set_trace()
+    for line in open("csv/test_data/relationships_test.csv"):
+        line = line[:-1]
         char1, char2 = line.split(',')
 
-        relationship = Relationship(char1=char1, char2=char2)
+        character_1 = Character.query.filter_by(char_name=char1).first()
+        character_2 = Character.query.filter_by(char_name=char2).first()
+
+
+        # if not Relationship.query.filter((Relationship.char1==character_1.char_id)&
+        #                                  (Relationship.char2==character_2.char_id)).all():
+
+        relationship = Relationship(char1=character_1.char_id,
+                                        char2=character_2.char_id)
 
         db.session.add(relationship)
 
@@ -57,19 +69,19 @@ def load_test_relationships():
 
 # Write code for all these, obviously.
 
-def load_characters():
+# def load_characters():
 
-    pass
-
-
-def load_relationships():
-
-    pass
+#     pass
 
 
-def load_series():
+# def load_relationships():
 
-    pass
+#     pass
+
+
+# def load_series():
+
+#     pass
 
 
 # Functions for CharacterSeries, User, Rating?
@@ -96,5 +108,6 @@ if __name__ == "__main__":
     db.create_all()
     load_test_characters()
     load_test_series()
+    load_test_relationships()
 
     # Run the functions (loading data, setting value of ids)
