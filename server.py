@@ -57,11 +57,22 @@ def display_character():
         abort(404)
 
 
+# Gotta figure out the whole displaying the characters thing
 @app.route('/series')
 def display_series():
     """Display series info template."""
 
-    pass
+    series_id = request.args.get("series")
+    series = Series.by_id(series_id)
+    # characters = 
+
+
+    if series:
+        return render_template("series.html",
+                                series=series)#,
+                                # characters=characters)
+    else:
+        abort(404)
 
 
 # What html templates do I still need?

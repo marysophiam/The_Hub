@@ -7,9 +7,9 @@ from server import app
 
 # TO DO: rename variables to match model.py renamed variables
 
-def load_test_characters():
+def load_characters():
 
-    for line in open("csv/test_data/characters_test.csv"):
+    for line in open("csv/characters.csv"):
         line = line[:-1]
         name, actor, bio, image = line.split(',')
 
@@ -23,9 +23,9 @@ def load_test_characters():
     db.session.commit()
 
 
-def load_test_series():
+def load_series():
 
-    for line in open("csv/test_data/series_test.csv"):
+    for line in open("csv/series.csv"):
         line = line[:-1]
         name, synopsis, date, image = line.split(',')
 
@@ -39,9 +39,9 @@ def load_test_series():
     db.session.commit()
 
 
-def load_test_relationships():
+def load_relationships():
 
-    for line in open("csv/test_data/relationships_test.csv"):
+    for line in open("csv/relationships.csv"):
         line = line[:-1]
         char1_name, char2_name = line.split(',')
 
@@ -56,9 +56,9 @@ def load_test_relationships():
     db.session.commit()
 
 
-def load_test_appearances():
+def load_appearances():
 
-    for line in open("csv/test_data/char_series_test.csv"):
+    for line in open("csv/characterseries.csv"):
         line = line[:-1]
         char_name, series_name = line.split(',')
 
@@ -72,27 +72,6 @@ def load_test_appearances():
 
     db.session.commit()
 
-
-
-# Write code for all these, obviously.
-# Can just rename above functions when data is fully seeded.
-
-# def load_characters():
-#   """This will replace load_test_characters()"""
-
-#     pass
-
-
-# def load_relationships():
-#   """This will replace load_test_relationships()"""
-
-#     pass
-
-
-# def load_series():
-#   """This will replace load_test_series()"""
-
-#     pass
 
 
 # Functions for CharacterSeries, User, Rating?
@@ -117,9 +96,9 @@ if __name__ == "__main__":
     connect_to_db(app)
     db.drop_all()
     db.create_all()
-    load_test_characters()      # rename later
-    load_test_series()          # rename later
-    load_test_relationships()   # rename later
-    load_test_appearances()
+    load_characters()
+    load_series()
+    load_relationships()
+    load_appearances()
 
     # Run the functions (loading data, setting value of ids)

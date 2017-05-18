@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html>
+  <body>
+
+  <h3>{{ series.name }}</h3>
+  <p>{{ series.image }}<p>
+  <p><b>Initial air date:</b> {{ series.date }}</p>
+  <p><b>Synopsis:</b> {{ series.synopsis }}<p>
+
+  <b>Characters in this series:</b><br>
+  {% for c in characters %}
+    {{c.name}}
+    <br>
+  {% endfor %}
+
+  </body>
+</html>

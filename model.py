@@ -47,9 +47,6 @@ class Character(db.Model):
     def relationships(self):
         # find relationships
 
-            # GO BACK AND PLAY AROUND WITH THIS WHEN YOU HAVE A LITTLE TIME
-            # import pdb; pdb.set_trace()
-
         q = Relationship.query
         filter_rels = q.filter((Relationship.char1_id == self.char_id) | 
                  (Relationship.char2_id == self.char_id)).all()
@@ -68,6 +65,8 @@ class Character(db.Model):
         return chars
 
 
+    # TO DO (after MVP):
+    # Consider separating character/relationship/series models into separate files?
 
     appearances = db.relationship("Series",
                                   secondary="character_series",
@@ -109,9 +108,38 @@ class Series(db.Model):
     image = db.Column(db.String(100))   # Will be a link to image URL
 
     @classmethod
+    def by_id(cls, series_id):
+        q = cls.query.filter_by(series_id=series_id)
+        s = q.first()
+        return s
+
+    @classmethod
     def all(cls):
         q = cls.query
         return q.all()
+
+
+    ######################################################
+
+    # def characters(self):
+    #     # find characters in a series
+
+    #     # Let's pseudocode this:
+
+    #     # Query Character
+    #     # For character in characters:
+    #     #   If character is in series:
+    #     #       add to a list
+    #     # return the list
+
+    #     q = CharacterSeries.query.all() #?????
+
+    #     for row in q:
+    #         if 
+
+    #######################################################
+
+
 
     def __repr__(self):
         """Provide helpful representation when printed"""
