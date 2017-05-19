@@ -1,3 +1,7 @@
+<!--
+Need to add ratings system to this
+-->
+
 <!DOCTYPE html>
 
 <html>
@@ -10,7 +14,7 @@
 
   <b>Characters in this series:</b><br>
   {% for c in characters %}
-    {{c.name}}
+    <a href="/character/{{ c.name }}">{{ c.name }}</a>
     <br>
   {% endfor %}
 

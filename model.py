@@ -22,6 +22,10 @@ class Character(db.Model):
     bio = db.Column(db.Text)
     image = db.Column(db.String(100))   # Will be a link to image URL
 
+    # If I comment this out, will it break things?
+    # Hate that I don't seem to be using this anymore in the server.py file,
+    # really like Steve's strategy of taking all querying out of that file &
+    # just having it all in here...Class methods are cool!
     @classmethod
     def by_id(cls, char_id):
         q = cls.query.filter_by(char_id=char_id)
@@ -107,39 +111,16 @@ class Series(db.Model):
     date = db.Column(db.String(10))
     image = db.Column(db.String(100))   # Will be a link to image URL
 
-    @classmethod
-    def by_id(cls, series_id):
-        q = cls.query.filter_by(series_id=series_id)
-        s = q.first()
-        return s
+    # @classmethod
+    # def by_id(cls, series_id):
+    #     q = cls.query.filter_by(series_id=series_id)
+    #     s = q.first()
+    #     return s
 
     @classmethod
     def all(cls):
         q = cls.query
         return q.all()
-
-
-    ######################################################
-
-    # def characters(self):
-    #     # find characters in a series
-
-    #     # Let's pseudocode this:
-
-    #     # Query Character
-    #     # For character in characters:
-    #     #   If character is in series:
-    #     #       add to a list
-    #     # return the list
-
-    #     q = CharacterSeries.query.all() #?????
-
-    #     for row in q:
-    #         if 
-
-    #######################################################
-
-
 
     def __repr__(self):
         """Provide helpful representation when printed"""

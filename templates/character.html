@@ -1,3 +1,7 @@
+<!--
+Need to add ratings system to this
+-->
+
 <!DOCTYPE html>
 
 <html>
@@ -11,15 +15,15 @@
 
   <b>Has interactions with:</b><br>
   {% for c in relationships %}
-    {{c.name}}
+    <a href="/character/{{ c.name }}">{{ c.name }}</a>
     <br>
   {% endfor %}
 
   <br>
 
   <b>Appears in:</b><br>
-  {% for a in appearances %}
-    {{ a.name }}
+  {% for series in appearances %}
+    <a href="/series/{{ series.name }}">{{ series.name }}</a>
     <br>
     {% endfor %}
 

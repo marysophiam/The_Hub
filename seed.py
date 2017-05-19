@@ -73,11 +73,29 @@ def load_appearances():
     db.session.commit()
 
 
+def load_users():
 
-# Functions for CharacterSeries, User, Rating?
+    for line in open("csv/users.csv"):
+        line = line[:-1]
+        user_email, pswd = line.split(',')
+
+        user = User(user_email=user_email,
+                    pswd=pswd)
+
+        db.session.add(user)
+
+    db.session.commit()
+
+
+# TO DO:
+def load_ratings():
+
+    pass
+
 
 
 # THIS ISN'T NEEDED MOST LIKELY, IT'S JUST AN EXAMPLE FROM THE RATINGS LAB
+# Unsure though...keeping it here for now just in case...
 
 # def set_val_user_id():
 #     """Set value for the next user_id after seeding database"""
@@ -100,5 +118,6 @@ if __name__ == "__main__":
     load_series()
     load_relationships()
     load_appearances()
+    load_users()
 
     # Run the functions (loading data, setting value of ids)
