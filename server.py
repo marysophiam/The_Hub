@@ -124,11 +124,11 @@ def user_detail(user_id):
     return render_template("user.html", user=user)
 
 
-# Not exactly sure where I'm going with this yet, placeholder for now I guess
-@app.route('/user')
-def display_user_profile():
+# # Not exactly sure where I'm going with this yet, placeholder for now I guess
+# @app.route('/user')
+# def display_user_profile():
 
-    pass
+#     pass
 
 
 # What html templates do I still need?
