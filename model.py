@@ -156,17 +156,20 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_email = db.Column(db.String(50))
-    pswd = db.Column(db.String(20))
+    email = db.Column(db.String(50))
+    password = db.Column(db.String(20))
     # display_name =    # May or may not use, not really needed for project
 
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<User user_id=%s user_email=%s>" % (self.user_id, self.user_email)
+        return "<User user_id=%s email=%s>" % (self.user_id, self.email)
 
 
 # Middle table between Character & User
+# TO ASK:
+# Ehhhh....crap. Now rating Series too. Does this need to be 2 separate
+# classes, or can I define 2 functions within the class?
 class Rating(db.Model):
     """Rating of a character by a user."""
 
@@ -175,6 +178,7 @@ class Rating(db.Model):
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user = db.Column(db.String(50))
     character = db.Column(db.String(50))
+    series = db.Column(db.String(50))
     rating = db.Column(db.Integer)
 
     def __repr__(self):

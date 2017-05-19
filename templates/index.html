@@ -7,8 +7,9 @@
   (imagine a pretty carousel...)
 
   <ul>
-  {% for character in characters %}
-    <li>{{ character.name }}, {{ character.image }}</li>
+  {% for c in characters %}
+    <li><a href="/character/{{ c.name }}">{{ c.name }}</a>,
+    <a href="/character/{{ c.name }}">{{ c.image }}</a></li>
   {% endfor %}
   </ul>
 
@@ -17,7 +18,8 @@
 
   <ul>
   {% for series in series %}
-    <li>{{ series.name }}, {{ series.image }}</li>
+    <li><a href="/series/{{ series.name }}">{{ series.name }}</a>,
+    <a href="/series/{{ series.name }}">{{ series.image }}</a></li>
   {% endfor %}
   </ul>
 

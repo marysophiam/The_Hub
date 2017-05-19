@@ -77,10 +77,10 @@ def load_users():
 
     for line in open("csv/users.csv"):
         line = line[:-1]
-        user_email, pswd = line.split(',')
+        email, password = line.split(',')
 
-        user = User(user_email=user_email,
-                    pswd=pswd)
+        user = User(email=email,
+                    password=password)
 
         db.session.add(user)
 
