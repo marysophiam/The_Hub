@@ -14,8 +14,7 @@ app.secret_key = "TARDIS"
 app.jinja_env.undefined = StrictUndefined
 
 
-# TO DO: Make links to character/series pages in template
-# Eventually these will be the carousel
+# Eventually links will be the carousel
 @app.route('/')
 def display_index():
     """Display index template."""
@@ -86,11 +85,11 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("No such user")
+        flash("There's no user by this name.")
         return redirect("/login")
 
     if user.password != password:
-        flash("Incorrect password")
+        flash("Incorrect password, try again.")
         return redirect("/login")
 
     session["user_id"] = user.user_id
@@ -117,23 +116,18 @@ def user_list():
 
 
 @app.route("/users/<int:user_id>")
-def user_detail(user_id):
-    """Show info about user."""
+def display_user_info(user_id):
+    """Show info about single user by id."""
 
     user = User.query.get(user_id)
     return render_template("user.html", user=user)
 
 
-# # Not exactly sure where I'm going with this yet, placeholder for now I guess
-# @app.route('/user')
-# def display_user_profile():
-
-#     pass
-
-
 # What html templates do I still need?
-# -Splash
-# -Voting/Quiz?
+# --base.html + inheritance for all
+# --user logout/registration, etc.
+# --Splash
+# --Voting/Quiz?  # Only if time at very end (not likely right now)
 
 
 if __name__ == "__main__":

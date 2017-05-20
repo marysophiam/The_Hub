@@ -17,9 +17,9 @@
   (imagine a pretty carousel...)
 
   <ul>
-  {% for series in series %}
-    <li><a href="/series/{{ series.name }}">{{ series.name }}</a>,
-    <a href="/series/{{ series.name }}">{{ series.image }}</a></li>
+  {% for s in series %}
+    <li><a href="/series/{{ s.name }}">{{ s.name }}</a>,
+    <a href="/series/{{ s.name }}">{{ s.image }}</a></li>
   {% endfor %}
   </ul>
 

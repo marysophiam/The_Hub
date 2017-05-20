@@ -5,7 +5,6 @@ from model import connect_to_db, db, Character, Relationship, Series, User, Char
 
 from server import app
 
-# TO DO: rename variables to match model.py renamed variables
 
 def load_characters():
 
@@ -91,23 +90,6 @@ def load_users():
 def load_ratings():
 
     pass
-
-
-
-# THIS ISN'T NEEDED MOST LIKELY, IT'S JUST AN EXAMPLE FROM THE RATINGS LAB
-# Unsure though...keeping it here for now just in case...
-
-# def set_val_user_id():
-#     """Set value for the next user_id after seeding database"""
-
-#     # Get the Max user_id in the database
-#     result = db.session.query(func.max(User.user_id)).one()
-#     max_id = int(result[0])
-
-#     # Set the value for the next user_id to be max_id + 1
-#     query = "SELECT setval('users_user_id_seq', :new_id)"
-#     db.session.execute(query, {'new_id': max_id + 1})
-#     db.session.commit()
 
 
 if __name__ == "__main__":

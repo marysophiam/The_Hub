@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-#################################################################################
+########################################################################
 # Model definitions
 
 class Character(db.Model):
@@ -70,7 +70,7 @@ class Character(db.Model):
 
 
     # TO DO (after MVP):
-    # Consider separating character/relationship/series models into separate files?
+    # Consider separating character/relationship/series models into separate files
 
     appearances = db.relationship("Series",
                                   secondary="character_series",
@@ -167,13 +167,10 @@ class User(db.Model):
 
 
 # Middle table between Character & User
-# TO ASK:
-# Ehhhh....crap. Now rating Series too. Does this need to be 2 separate
-# classes, or can I define 2 functions within the class?
-class Rating(db.Model):
+class CharacterRating(db.Model):
     """Rating of a character by a user."""
 
-    __tablename__ = 'ratings'
+    __tablename__ = 'character_ratings'
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user = db.Column(db.String(50))
@@ -185,6 +182,18 @@ class Rating(db.Model):
         """Provide helpful representation when printed"""
 
         return "<Rating user=%s character=%s rating=%s>" % (self.user, self.character, self.rating)
+
+
+# class SeriesRating(db.Model):
+#     """Rating of a series by a user."""
+
+#     __tablename__ = 'series_ratings'
+
+
+#     def __repr__(self):
+#         """Provide helpful representation when printed"""
+
+#         return # <   >
 
 
 ##############################################################################
