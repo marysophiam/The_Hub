@@ -2,10 +2,8 @@
 Need to add ratings system to this
 -->
 
-<!DOCTYPE html>
-
-<html>
-  <body>
+{% extends 'base.html' %}
+{% block content %}
 
   <h3>{{ series.name }}</h3>
   <p>{{ series.image }}<p>
@@ -18,5 +16,4 @@ Need to add ratings system to this
     <br>
   {% endfor %}
 
-  </body>
-</html>
+{% endblock %}

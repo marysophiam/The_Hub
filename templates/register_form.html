@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Register to become a Time Agent:</h1>
+<form action="register" method="POST">
+
+  <div>
+    <label>
+      Email
+      <input type="email" name="email">
+    </label>
+  </div>
+
+  <br>
+
+  <div>
+    <label>
+      Password
+      <input type="password" name="password">
+    </label>
+  </div>
+
+  <br>
+
+  <div>
+    <input type="submit" value="Allons-y!">
+  </div>
+
+</form>
+
+{% endblock %}

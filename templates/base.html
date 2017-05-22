@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="n">
+<head>
+  <title>The Hub</title>
+</head>
+<body>
+
+<h1><a href='/'>The Hub</a></h1>
+
+{% if "user_id" in session %}
+    <a href='/logout'>Logout</a>
+    <a href='/users'>Users</a>
+{% else %}
+    <a href='/login'>Login</a>
+    <a href='/register'>Register</a>
+{% endif %}
+
+<hr>
+
+{% for flash in get_flashed_messages() %}
+  {{ flash }}
+{% endfor %}
+
+{% block content %}
+    Put your body here.
+{% endblock %}
+
+</body>
+</html>

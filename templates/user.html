@@ -1,5 +1,17 @@
-blah blah blah will put something here soon
-<br><br>
-If you don't watch Doctor Who, you really should...
-<br><br>
-Torchwood, outside the government, beyond the police...
+<!--
+Need to build out this template to display user info
+Would be cool at some point to include favorites & whatnot
+For now, just email...and go from there
+
+
+TO DO: Upon registration, have user already automatically signed in?
+Or, at least display a message to indicate they must log in
+-->
+
+{% extends 'base.html' %}
+{% block content %}
+
+  <p><b>User Email: </b>{{ user.email}}</p>
+  <p>(Some content here, TBD)</p>
+
+{% endblock %}

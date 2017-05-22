@@ -36,6 +36,11 @@ class Character(db.Model):
     def by_ids(cls, char_ids):
         q = cls.query.filter(cls.char_id.in_(char_ids))
         return q.all()
+
+    @classmethod
+    def filter_by():
+
+        pass
    
     @classmethod
     def all(cls):
@@ -43,7 +48,7 @@ class Character(db.Model):
         return q.all()
 
     @classmethod
-    def new(cls, name, actor, summary, image):
+    def new(cls, name, actor, bio, image):
         # c = create obj
         # c.insert()
         return c
@@ -173,15 +178,27 @@ class CharacterRating(db.Model):
     __tablename__ = 'character_ratings'
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user = db.Column(db.String(50))
-    character = db.Column(db.String(50))
-    series = db.Column(db.String(50))
+    char_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     rating = db.Column(db.Integer)
+
+    # Define relationship to user
+    user = db.relationship("User",
+                           backref=db.backref("ratings", order_by=rating_id))
+
+    # Define relationship to movie
+    character = db.relationship("Character",
+                            backref=db.backref("character", order_by=rating_id))
+
+
+    # build db relationship here, backrefs
+    # need to add "series_ratings" table
+
 
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Rating user=%s character=%s rating=%s>" % (self.user, self.character, self.rating)
+        return "<Rating rating_id=%s character=%s user=%s rating=%s>" % (self.rating_id, self.character, self.user, self.rating)
 
 
 # class SeriesRating(db.Model):

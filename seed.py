@@ -1,7 +1,7 @@
 import datetime
 from sqlalchemy import func
 
-from model import connect_to_db, db, Character, Relationship, Series, User, CharacterSeries, Rating
+from model import connect_to_db, db, Character, Relationship, Series, User, CharacterSeries, CharacterRating
 
 from server import app
 
@@ -87,7 +87,13 @@ def load_users():
 
 
 # TO DO:
-def load_ratings():
+def load_character_ratings():
+
+    pass
+
+
+# TO DO:
+def load_series_ratings():
 
     pass
 

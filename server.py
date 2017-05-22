@@ -3,8 +3,8 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, abort
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, Character, Relationship, Series, User, CharacterSeries, Rating
-    # and also other classes once they're worked out?
+from model import connect_to_db, db,Character, Relationship, Series, User, CharacterSeries, CharacterRating
+
 
 app = Flask(__name__)
 
@@ -85,7 +85,7 @@ def login_process():
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        flash("There's no user by this name.")
+        flash("No user with that email found, please register.")
         return redirect("/login")
 
     if user.password != password:
@@ -94,8 +94,8 @@ def login_process():
 
     session["user_id"] = user.user_id
 
-    flash("Logged in")
-    return redirect("/users/%s" % user.user_id)
+    flash("Welcome to the Whoniverse.")
+    return redirect("/")
 
 
 @app.route('/logout')
@@ -105,6 +105,30 @@ def logout():
     del session["user_id"]
     flash("Logged Out.")
     return redirect("/")
+
+
+@app.route('/register', methods=['GET'])
+def register_form():
+    """Show form for user signup."""
+
+    return render_template("register_form.html")
+
+
+@app.route('/register', methods=['POST'])
+def register_process():
+    """Process registration."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+
+    new_user = User(email=email, password=password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    flash("User %s added." % email)
+    return redirect("/users/%s" % new_user.user_id)
 
 
 @app.route("/users")
