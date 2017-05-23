@@ -188,11 +188,7 @@ class CharacterRating(db.Model):
 
     # Define relationship to character
     character = db.relationship("Character",
-                            backref=db.backref("character", order_by=rating_id))
-
-
-    # build db relationship here, backrefs
-    # need to add "series_ratings" table
+                            backref=db.backref("character_ratings", order_by=rating_id))
 
 
     def __repr__(self):
@@ -203,6 +199,8 @@ class CharacterRating(db.Model):
 
 # class SeriesRating(db.Model):
 #     """Rating of a series by a user."""
+
+    # Need to build series_ratings table still
 
 #     __tablename__ = 'series_ratings'
 

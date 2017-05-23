@@ -86,7 +86,6 @@ def load_users():
     db.session.commit()
 
 
-# TO DO:
 def load_character_ratings():
 
     for line in open("csv/char_ratings.csv"):

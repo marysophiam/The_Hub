@@ -49,6 +49,10 @@ def display_character(character_name):
     else:
         user_rating = None
 
+    rating_scores = [r.score for r in character.character_ratings]
+    avg_rating = float(sum(rating_scores)) / len(rating_scores)
+    # Work out how to display int only if avg isn't a float,
+    # float if it is
 
     if character:
         relationships = character.relationships()
@@ -57,16 +61,13 @@ def display_character(character_name):
                                 character=character,
                                 relationships=relationships,
                                 appearances=appearances,
-                                user_rating=user_rating)
-# Put user_rating=user_rating in here? char_id=char_id?
+                                user_rating=user_rating,
+                                avg_rating=avg_rating)
 
     else:
         abort(404)
 
 
-
-# 5/22 5:55 pm : This is working now. Oy vey. Test data at least works.
-# Come back here tomorrow when you start.
 @app.route('/character/<character_name>', methods=['POST'])
 def post_character_rating(character_name):
 
@@ -83,6 +84,13 @@ def post_character_rating(character_name):
 
     rating = CharacterRating.query.filter_by(user_id=user_id, char_id=character.char_id).first()
 
+    # This probably needs to be cleaned up--don't think the flash msg is 
+    # necessary as the template is now set to automatically display the score
+    # if a user has provided one.
+
+    # Come back and re-factor this once the ratings system for both
+    # characters & series are in place
+
     if rating:
         rating.score = score
         flash("Already rated.")
@@ -91,6 +99,11 @@ def post_character_rating(character_name):
         rating = CharacterRating(user_id=user_id, char_id=character.char_id, score=score)
         flash("Rating added.")
         db.session.add(rating)
+
+
+    # Get average rating of character
+
+
 
     db.session.commit()
 

@@ -28,17 +28,24 @@ Need to add ratings system to this
     <br>
 
   {% if "user_id" in session %}
-    <h2>Your Rating</h2>
+    <h4>Character Rating:</h4>
     {% if user_rating %}
-        <p>You currently rate this a {{ user_rating.score }}</p>
+      <p>You rated this character {{ user_rating.score }} out of 5</p>
     {% else %}
       <form action="/character/{{ character.name }}" method="POST">
-          <label>Rating:
-              <input type="number" name="score">
-          </label>
-          <input type="submit" value="Rate">
+          <select name="score">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        <input type="submit" value="Rate">
       </form>
     {% endif %}
   {% endif %}
+  <p>Average rating for this character: {{ avg_rating }}</p>
+
+  <hr>
 
 {% endblock %}
