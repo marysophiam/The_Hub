@@ -180,13 +180,13 @@ class CharacterRating(db.Model):
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    rating = db.Column(db.Integer)
+    score = db.Column(db.Integer)
 
     # Define relationship to user
     user = db.relationship("User",
                            backref=db.backref("ratings", order_by=rating_id))
 
-    # Define relationship to movie
+    # Define relationship to character
     character = db.relationship("Character",
                             backref=db.backref("character", order_by=rating_id))
 
@@ -198,7 +198,7 @@ class CharacterRating(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed"""
 
-        return "<Rating rating_id=%s character=%s user=%s rating=%s>" % (self.rating_id, self.character, self.user, self.rating)
+        return "<Rating rating_id=%s character=%s user=%s score=%s>" % (self.rating_id, self.character, self.user, self.score)
 
 
 # class SeriesRating(db.Model):

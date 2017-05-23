@@ -89,7 +89,22 @@ def load_users():
 # TO DO:
 def load_character_ratings():
 
-    pass
+    for line in open("csv/char_ratings.csv"):
+        line = line[:-1]
+        char_id, user_id, score = line.split(',')
+
+        char_id = int(char_id)
+        user_id = int(user_id)
+        score = int(score)
+
+        rating = CharacterRating(char_id=char_id,
+                        user_id=user_id,
+                        score=score)
+
+        db.session.add(rating)
+
+    db.session.commit()
+
 
 
 # TO DO:
@@ -107,5 +122,6 @@ if __name__ == "__main__":
     load_relationships()
     load_appearances()
     load_users()
+    load_character_ratings()
 
     # Run the functions (loading data, setting value of ids)

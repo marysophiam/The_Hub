@@ -27,6 +27,7 @@ def display_index():
                             series=series)
 
 
+# This is the GET method; Dennis said I don't actually have to put "GET" in here
 @app.route('/character/<character_name>')
 def display_character(character_name):
     """Display character info template."""
@@ -40,15 +41,60 @@ def display_character(character_name):
 
     character = Character.query.filter_by(name=character_name).first()
 
+    user_id = session.get("user_id")
+
+    if user_id:
+        user_rating = CharacterRating.query.filter_by(
+            char_id=character.char_id, user_id=user_id).first()
+    else:
+        user_rating = None
+
+
     if character:
         relationships = character.relationships()
         appearances = character.appearances
         return render_template("character.html",
                                 character=character,
                                 relationships=relationships,
-                                appearances=appearances)
+                                appearances=appearances,
+                                user_rating=user_rating)
+# Put user_rating=user_rating in here? char_id=char_id?
+
     else:
         abort(404)
+
+
+
+# 5/22 5:55 pm : This is working now. Oy vey. Test data at least works.
+# Come back here tomorrow when you start.
+@app.route('/character/<character_name>', methods=['POST'])
+def post_character_rating(character_name):
+
+    # character = Character.query.filter_by(name=character_name).first()
+
+    # Get form variables
+    score = int(request.form["score"])
+
+    user_id = session.get("user_id")
+    if not user_id:
+        raise Exception("No user logged in.")
+
+    character = Character.query.filter_by(name=character_name).first()
+
+    rating = CharacterRating.query.filter_by(user_id=user_id, char_id=character.char_id).first()
+
+    if rating:
+        rating.score = score
+        flash("Already rated.")
+
+    else:
+        rating = CharacterRating(user_id=user_id, char_id=character.char_id, score=score)
+        flash("Rating added.")
+        db.session.add(rating)
+
+    db.session.commit()
+
+    return redirect("/character/%s" % (character.name))
 
 
 @app.route('/series/<series_name>')
