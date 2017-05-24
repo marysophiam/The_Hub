@@ -1,7 +1,7 @@
 import datetime
 from sqlalchemy import func
 
-from model import connect_to_db, db, Character, Relationship, Series, User, CharacterSeries, CharacterRating
+from model import connect_to_db, db, Character, Relationship, Series, User, CharacterSeries, CharacterRating, SeriesRating
 
 from server import app
 
@@ -105,11 +105,23 @@ def load_character_ratings():
     db.session.commit()
 
 
-
-# TO DO:
 def load_series_ratings():
 
-    pass
+    for line in open("csv/series_ratings.csv"):
+        line = line[:-1]
+        series_id, user_id, score = line.split(',')
+
+        series_id = int(char_id)
+        user_id = int(user_id)
+        score = int(score)
+
+        rating = SeriesRating(series_id=series_id,
+                        user_id=user_id,
+                        score=score)
+
+        db.session.add(rating)
+
+    db.session.commit()
 
 
 if __name__ == "__main__":
@@ -122,5 +134,6 @@ if __name__ == "__main__":
     load_appearances()
     load_users()
     load_character_ratings()
+    load_series_ratings()
 
     # Run the functions (loading data, setting value of ids)

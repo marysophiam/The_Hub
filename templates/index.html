@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+
+{% block js_data %}
+  window.server_data = {{ js_data | safe }};
+{% endblock %}
+
 {% block content %}
 
   <h3>Characters</h3>

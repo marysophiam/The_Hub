@@ -1,9 +1,10 @@
+import json
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, abort
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db,Character, Relationship, Series, User, CharacterSeries, CharacterRating
+from model import connect_to_db, db,Character, Relationship, Series, User, CharacterSeries, CharacterRating, SeriesRating
 
 
 app = Flask(__name__)
@@ -22,9 +23,14 @@ def display_index():
     characters = Character.all()
     series = Series.all()
 
+    data = {"data":[1,2,3,4,5]}
+    js_data = json.dumps(data)
+
     return render_template("index.html",
                             characters=characters,
-                            series=series)
+                            series=series,
+                            js_data = js_data)
+                            # stuff I did w/ Steve 5/23
 
 
 # This is the GET method; Dennis said I don't actually have to put "GET" in here
@@ -50,9 +56,13 @@ def display_character(character_name):
         user_rating = None
 
     rating_scores = [r.score for r in character.character_ratings]
-    avg_rating = float(sum(rating_scores)) / len(rating_scores)
+    if rating_scores:
+        avg_rating = float(sum(rating_scores)) / len(rating_scores)
+        avg_rating = 'Average rating for this character: %.1f' % avg_rating
     # Work out how to display int only if avg isn't a float,
-    # float if it is
+    # float if it is, and to only 1 decimal point
+    else:
+        avg_rating = "Not yet rated."
 
     if character:
         relationships = character.relationships()
@@ -70,8 +80,6 @@ def display_character(character_name):
 
 @app.route('/character/<character_name>', methods=['POST'])
 def post_character_rating(character_name):
-
-    # character = Character.query.filter_by(name=character_name).first()
 
     # Get form variables
     score = int(request.form["score"])
@@ -100,11 +108,6 @@ def post_character_rating(character_name):
         flash("Rating added.")
         db.session.add(rating)
 
-
-    # Get average rating of character
-
-
-
     db.session.commit()
 
     return redirect("/character/%s" % (character.name))
@@ -114,16 +117,69 @@ def post_character_rating(character_name):
 def display_series(series_name):
     """Display series info template."""
 
-    # series_id = request.args.get("series")
     series = Series.query.filter_by(name=series_name).first()
+
+    user_id = session.get("user_id")
+
+    if user_id:
+        user_rating = SeriesRating.query.filter_by(
+            series_id=series.series_id, user_id=user_id).first()
+    else:
+        user_rating = None
+
+    rating_scores = [r.score for r in series.series_ratings]
+    if rating_scores:
+        avg_rating = float(sum(rating_scores)) / len(rating_scores)
+        avg_rating = 'Average rating for this series: %.1f' % avg_rating
+    # Work out how to display int only if avg isn't a float,
+    # float if it is, and to only 1 decimal point
+    else:
+        avg_rating = "Not yet rated."
 
     if series:
         characters = series.characters
         return render_template("series.html",
                                 series=series,
-                                characters=characters)
+                                characters=characters,
+                                user_rating=user_rating,
+                                avg_rating=avg_rating)
     else:
         abort(404)
+
+
+@app.route('/series/<series_name>', methods=['POST'])
+def post_series_rating(series_name):
+
+    # Get form variables
+    score = int(request.form["score"])
+
+    user_id = session.get("user_id")
+    if not user_id:
+        raise Exception("No user logged in.")
+
+    series = Series.query.filter_by(name=series_name).first()
+
+    rating = SeriesRating.query.filter_by(user_id=user_id, series_id=series.series_id).first()
+
+    # This probably needs to be cleaned up--don't think the flash msg is 
+    # necessary as the template is now set to automatically display the score
+    # if a user has provided one.
+
+    # Come back and re-factor this once the ratings system for both
+    # characters & series are in place
+
+    if rating:
+        rating.score = score
+        flash("Already rated.")
+
+    else:
+        rating = SeriesRating(user_id=user_id, series_id=series.series_id, score=score)
+        flash("Rating added.")
+        db.session.add(rating)
+
+    db.session.commit()
+
+    return redirect("/series/%s" % (series.name))
 
 
 @app.route('/login', methods=['GET'])
@@ -207,8 +263,6 @@ def display_user_info(user_id):
 
 
 # What html templates do I still need?
-# --base.html + inheritance for all
-# --user logout/registration, etc.
 # --Splash
 # --Voting/Quiz?  # Only if time at very end (not likely right now)
 

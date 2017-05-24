@@ -139,6 +139,7 @@ class CharacterSeries(db.Model):
     __tablename__ = 'character_series'
 
     appearance_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # PrimaryKeyConstraint
     character = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     series = db.Column(db.Integer, db.ForeignKey('series.series_id'))
 
@@ -184,7 +185,7 @@ class CharacterRating(db.Model):
 
     # Define relationship to user
     user = db.relationship("User",
-                           backref=db.backref("ratings", order_by=rating_id))
+                           backref=db.backref("character_ratings", order_by=rating_id))
 
     # Define relationship to character
     character = db.relationship("Character",
@@ -197,21 +198,33 @@ class CharacterRating(db.Model):
         return "<Rating rating_id=%s character=%s user=%s score=%s>" % (self.rating_id, self.character, self.user, self.score)
 
 
-# class SeriesRating(db.Model):
-#     """Rating of a series by a user."""
+# Middle table between Series & User
+class SeriesRating(db.Model):
+    """Rating of a character by a user."""
 
-    # Need to build series_ratings table still
+    __tablename__ = 'series_ratings'
 
-#     __tablename__ = 'series_ratings'
+    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    series_id = db.Column(db.Integer, db.ForeignKey('series.series_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    score = db.Column(db.Integer)
+
+    # Define relationship to user
+    user = db.relationship("User",
+                           backref=db.backref("series_ratings", order_by=rating_id))
+
+    # Define relationship to character
+    series = db.relationship("Series",
+                            backref=db.backref("series_ratings", order_by=rating_id))
 
 
-#     def __repr__(self):
-#         """Provide helpful representation when printed"""
+    def __repr__(self):
+        """Provide helpful representation when printed"""
 
-#         return # <   >
+        return "<Rating rating_id=%s series=%s user=%s score=%s>" % (self.rating_id, self.series, self.user, self.score)
 
 
-##############################################################################
+#############################################################################
 # Helper functions
 
 def connect_to_db(app):

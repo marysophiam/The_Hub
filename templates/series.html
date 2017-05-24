@@ -16,4 +16,25 @@ Need to add ratings system to this
     <br>
   {% endfor %}
 
+  {% if "user_id" in session %}
+    <h4>Series Rating:</h4>
+    {% if user_rating %}
+      <p>You rated this series {{ user_rating.score }} out of 5</p>
+    {% else %}
+      <form action="/series/{{ series.name }}" method="POST">
+          <select name="score">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        <input type="submit" value="Rate">
+      </form>
+    {% endif %}
+  {% endif %}
+  <p>{{ avg_rating }}</p>
+
+  <hr>
+
 {% endblock %}
