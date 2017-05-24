@@ -65,10 +65,14 @@ def display_character(character_name):
         avg_rating = "Not yet rated."
 
     if character:
+        f = open(character.bio, 'r')
+        char_bio = f.read()
+        char_bio = char_bio.decode('utf-8')
         relationships = character.relationships()
         appearances = character.appearances
         return render_template("character.html",
                                 character=character,
+                                char_bio=char_bio,
                                 relationships=relationships,
                                 appearances=appearances,
                                 user_rating=user_rating,

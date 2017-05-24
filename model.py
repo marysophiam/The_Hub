@@ -19,7 +19,7 @@ class Character(db.Model):
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50))
     actor = db.Column(db.String(50))
-    bio = db.Column(db.Text)
+    bio = db.Column(db.Text)    # Will be a link to text file
     image = db.Column(db.String(100))   # Will be a link to image URL
 
     # If I comment this out, will it break things?
