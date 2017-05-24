@@ -141,9 +141,13 @@ def display_series(series_name):
         avg_rating = "Not yet rated."
 
     if series:
+        f = open(series.synopsis, 'r')
+        synopsis = f.read()
+        synopsis = synopsis.decode('utf-8')
         characters = series.characters
         return render_template("series.html",
                                 series=series,
+                                synopsis=synopsis,
                                 characters=characters,
                                 user_rating=user_rating,
                                 avg_rating=avg_rating)

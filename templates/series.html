@@ -1,14 +1,18 @@
-<!--
-Need to add ratings system to this
--->
-
 {% extends 'base.html' %}
 {% block content %}
+
+<style type="text/css">
+
+  #syn {
+    white-space: pre-wrap;
+  }
+
+</style>
 
   <h3>{{ series.name }}</h3>
   <p>{{ series.image }}<p>
   <p><b>Initial air date:</b> {{ series.date }}</p>
-  <p><b>Synopsis:</b> {{ series.synopsis }}<p>
+  <p id="syn"><b>Synopsis:</b> {{ synopsis }}<p>
 
   <b>Characters in this series:</b><br>
   {% for c in characters %}
