@@ -129,6 +129,7 @@ class Series(db.Model):
     synopsis = db.Column(db.Text)
     # changed from DateTime to account for series which occur over multiple years
     date = db.Column(db.String(10))
+    chron_order = db.Column(db.Integer)
     image = db.Column(db.String(100))   # Will be a link to image URL
 
     # @classmethod

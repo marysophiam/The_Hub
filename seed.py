@@ -27,11 +27,12 @@ def load_series():
 
     for line in open("csv/series.csv"):
         line = line[:-1]
-        name, synopsis, date, image = line.split(',')
+        name, synopsis, date, chron_order, image = line.split(',')
 
         series = Series(name=name,
                         synopsis=synopsis,
                         date=date,
+                        chron_order=chron_order,
                         image=image)
 
         db.session.add(series)
