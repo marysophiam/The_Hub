@@ -1,15 +1,15 @@
-import json
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session, abort
+from flask import Flask, render_template, request, flash, redirect, session, abort, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db,Character, Relationship, Series, User, CharacterSeries, CharacterRating, SeriesRating
 
+import json
+
 
 app = Flask(__name__)
 
-# Required to use Flask sessions and the debug toolbar
 app.secret_key = "TARDIS"
 
 app.jinja_env.undefined = StrictUndefined
@@ -96,16 +96,12 @@ def post_character_rating(character_name):
 
     rating = CharacterRating.query.filter_by(user_id=user_id, char_id=character.char_id).first()
 
-    # This probably needs to be cleaned up--don't think the flash msg is 
-    # necessary as the template is now set to automatically display the score
-    # if a user has provided one.
-
     # Come back and re-factor this once the ratings system for both
     # characters & series are in place
 
     if rating:
         rating.score = score
-        flash("Already rated.")
+        # flash("Already rated.")
 
     else:
         rating = CharacterRating(user_id=user_id, char_id=character.char_id, score=score)
@@ -117,6 +113,7 @@ def post_character_rating(character_name):
     return redirect("/character/%s" % (character.name))
 
 
+# GET method
 @app.route('/series/<series_name>')
 def display_series(series_name):
     """Display series info template."""
@@ -135,8 +132,7 @@ def display_series(series_name):
     if rating_scores:
         avg_rating = float(sum(rating_scores)) / len(rating_scores)
         avg_rating = 'Average rating for this series: %.1f' % avg_rating
-    # Work out how to display int only if avg isn't a float,
-    # float if it is, and to only 1 decimal point
+    # Work out how to display int only if avg isn't a float, float if it is?
     else:
         avg_rating = "Not yet rated."
 
@@ -158,7 +154,6 @@ def display_series(series_name):
 @app.route('/series/<series_name>', methods=['POST'])
 def post_series_rating(series_name):
 
-    # Get form variables
     score = int(request.form["score"])
 
     user_id = session.get("user_id")
@@ -169,16 +164,12 @@ def post_series_rating(series_name):
 
     rating = SeriesRating.query.filter_by(user_id=user_id, series_id=series.series_id).first()
 
-    # This probably needs to be cleaned up--don't think the flash msg is 
-    # necessary as the template is now set to automatically display the score
-    # if a user has provided one.
-
     # Come back and re-factor this once the ratings system for both
     # characters & series are in place
 
     if rating:
         rating.score = score
-        flash("Already rated.")
+        # flash("Already rated.")
 
     else:
         rating = SeriesRating(user_id=user_id, series_id=series.series_id, score=score)
@@ -268,6 +259,60 @@ def display_user_info(user_id):
 
     user = User.query.get(user_id)
     return render_template("user.html", user=user)
+
+
+
+
+# Just starting this out, what needs to happen here?
+@app.route("/characters.json")
+def get_info_for_char_d3():   # Naming?
+
+    json = {"nodes":[], "links":[]}
+
+    characters = Character.all()
+
+    for c in characters:
+        node = {}
+        node["id"] = c.name
+        node["group"] = c.group
+        json["nodes"].append(node)
+
+    relationships = Relationship.query.all()
+
+    for r in relationships:
+        # char1_name = 
+        # char2_name = 
+
+        link = {}
+        link["source"] = Character.by_id(r.char1_id).name
+        link["target"] = Character.by_id(r.char2_id).name
+        link["value"] = 1   # Add this column to table & enter actual values; this is the "weight" of relationship
+        json["links"].append(link)
+
+
+
+
+    return jsonify(json)
+
+
+# EXAMPLE CODE FROM STACK OVERFLOW FOR REFERENCE
+
+# @app.route('/_get_companies')
+# def get_companies_json():
+#     companies = {}
+#     for c in session.query(Company).all():
+#         companies[c.id] = {
+#             'name': c.name,
+#             'homepage_url': c.homepage_url,
+#         }
+
+#     return jsonify(companies)
+
+    
+
+
+
+
 
 
 # What html templates do I still need?

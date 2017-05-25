@@ -18,6 +18,10 @@ class Character(db.Model):
 
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(50))
+    # 1 = Doctor Regeneration, 2 = Companion,
+    # 3 = Jack (fixed point in time & space), 4 = Torchwood
+    group = db.Column(db.Integer)
+
     actor = db.Column(db.String(50))
     bio = db.Column(db.Text)    # Will be a link to text file
     image = db.Column(db.String(100))   # Will be a link to image URL
@@ -26,6 +30,10 @@ class Character(db.Model):
     # Hate that I don't seem to be using this anymore in the server.py file,
     # really like Steve's strategy of taking all querying out of that file &
     # just having it all in here...Class methods are cool!
+
+
+    # ASK STEVE ABOUT COMBINING THESE 2 LIKE WE TALKED ABOUT...
+
     @classmethod
     def by_id(cls, char_id):
         q = cls.query.filter_by(char_id=char_id)
@@ -97,6 +105,13 @@ class Relationship(db.Model):
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char1_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+
+
+    # Am I on the right track here....do I even need to add this here or do something else somewhere else? MEHHH
+
+    # char1_name = db.Column(db.String(50), db.ForeignKey('characters.name'))
+
+
 
     def __repr__(self):
         """Provide helpful representation when printed"""

@@ -10,9 +10,10 @@ def load_characters():
 
     for line in open("csv/characters.csv"):
         line = line[:-1]
-        name, actor, bio, image = line.split(',')
+        name, group, actor, bio, image = line.split(',')
 
         character = Character(name=name,
+                              group=group,
                               actor=actor,
                               bio=bio,
                               image=image)
