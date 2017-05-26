@@ -295,6 +295,14 @@ def get_info_for_char_d3():   # Naming?
     return jsonify(json)
 
 
+# # Render template for connections.html
+# @app.route("/visualize")
+# def d3_graph():
+
+#     pass
+
+
+
 # What html templates do I still need?
 # --Splash
 # --Voting/Quiz?  # Only if time at very end (not likely right now)
