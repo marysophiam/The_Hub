@@ -21,9 +21,8 @@ class Character(db.Model):
     # 1 = Doctor Regeneration, 2 = Companion,
     # 3 = Jack (fixed point in time & space), 4 = Torchwood
     group = db.Column(db.Integer)
-
     actor = db.Column(db.String(50))
-    bio = db.Column(db.Text)    # Will be a link to text file
+    bio = db.Column(db.Text)
     image = db.Column(db.String(100))   # Will be a link to image URL
 
     # If I comment this out, will it break things?
@@ -46,20 +45,26 @@ class Character(db.Model):
         return q.all()
 
     @classmethod
-    def filter_by():
+    def by_name(cls, name):
+        q = cls.query.filter_by(name=name)
+        c = q.first()
+        return c
 
-        pass
+    # @classmethod
+    # def filter_by():
+
+    #     pass
    
     @classmethod
     def all(cls):
         q = cls.query
         return q.all()
 
-    @classmethod
-    def new(cls, name, actor, bio, image):
-        # c = create obj
-        # c.insert()
-        return c
+    # @classmethod
+    # def new(cls, name, actor, bio, image):
+    #     # c = create obj
+    #     # c.insert()
+    #     return c
 
     def relationships(self):
         # find relationships
@@ -90,6 +95,17 @@ class Character(db.Model):
                                   backref="characters")
 
 
+    @staticmethod
+    def first_appears(char_id):
+        """Determine first series a character appears in."""
+
+        series_in = Character.by_id(char_id).appearances
+        series_set = {s.chron_order for s in series_in}
+        first = min(series_set)
+
+        return first
+
+
     def __repr__(self):
         """Provide helpful representation when printed"""
 
@@ -105,11 +121,18 @@ class Relationship(db.Model):
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char1_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    link_est = db.Column(db.Integer)
 
 
     # Am I on the right track here....do I even need to add this here or do something else somewhere else? MEHHH
 
     # char1_name = db.Column(db.String(50), db.ForeignKey('characters.name'))
+
+
+    # instance method
+    # determine the time step relationship link should appear on D3
+    # will be whichever series occurs later between 2
+    # 
 
 
 
@@ -137,6 +160,12 @@ class Series(db.Model):
     #     q = cls.query.filter_by(series_id=series_id)
     #     s = q.first()
     #     return s
+
+    @classmethod
+    def by_id(cls, series_id):
+        q = cls.query.filter_by(series_id=series_id)
+        s = q.first()
+        return s
 
     @classmethod
     def all(cls):

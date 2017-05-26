@@ -44,13 +44,14 @@ def load_relationships():
 
     for line in open("csv/relationships.csv"):
         line = line[:-1]
-        char1_name, char2_name = line.split(',')
+        char1_name, char2_name, link_est = line.split(',')
 
         character_1 = Character.query.filter_by(name=char1_name).first()
         character_2 = Character.query.filter_by(name=char2_name).first()
 
         relationship = Relationship(char1_id=character_1.char_id,
-                                    char2_id=character_2.char_id)
+                                    char2_id=character_2.char_id,
+                                    link_est=link_est)
 
         db.session.add(relationship)
 

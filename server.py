@@ -23,16 +23,14 @@ def display_index():
     characters = Character.all()
     series = Series.all()
 
-    # data = {"data":[1,2,3,4,5]}
-    # js_data = json.dumps(data)
+    data = {"data":[1,2,3,4,5]}
+    js_data = json.dumps(data)
 
     return render_template("index.html",
                             characters=characters,
+                            js_data = js_data,
                             series=series)
                             # stuff I did w/ Steve 5/23
-                            # put this back in later
-                            # ,
-                            # js_data = js_data
 
 
 # This is the GET method; Dennis said I don't actually have to put "GET" in here
@@ -263,15 +261,13 @@ def display_user_info(user_id):
     return render_template("user.html", user=user)
 
 
-
-
-# Just starting this out, what needs to happen here?
 @app.route("/characters.json")
-def get_info_for_char_d3():   # Naming?
+def get_info_for_d3():   # Naming?
 
     json = {"nodes":[], "links":[]}
 
     characters = Character.all()
+    relationships = Relationship.query.all()
 
     for c in characters:
         node = {}
@@ -279,27 +275,33 @@ def get_info_for_char_d3():   # Naming?
         node["group"] = c.group
         json["nodes"].append(node)
 
-    relationships = Relationship.query.all()
-
     for r in relationships:
-        # char1_name = 
-        # char2_name = 
 
         link = {}
         link["source"] = Character.by_id(r.char1_id).name
         link["target"] = Character.by_id(r.char2_id).name
-        link["value"] = 1   # query this for chron_order from Series--will be used as "value" for graph slider
+        link["value"] = str(r.link_est)     # YAAAASSSS IT WORKED
         json["links"].append(link)
 
+        # This did what it was supposed to. But--it doesn't account for the
+        # fact that 2 characters may have not met each other in the same series
+        # that they both appeared in the Whoniverse. I'm going to have to do
+        # this manually (like all the rest of my data) in order to ensure an
+        # accurate representation.
+
+        # if Character.first_appears(r.char1_id) > Character.first_appears(r.char2_id):
+        #     link["value"] = str(Character.first_appears(r.char1_id))
+        # else:
+        #     link["value"] = str(Character.first_appears(r.char2_id))
 
     return jsonify(json)
 
 
-# # Render template for connections.html
-# @app.route("/visualize")
-# def d3_graph():
+# Render template for connections.html
+@app.route("/visualize")
+def show_d3():
 
-#     pass
+    return render_template("connections.html")
 
 
 
