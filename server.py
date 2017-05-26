@@ -23,14 +23,16 @@ def display_index():
     characters = Character.all()
     series = Series.all()
 
-    data = {"data":[1,2,3,4,5]}
-    js_data = json.dumps(data)
+    # data = {"data":[1,2,3,4,5]}
+    # js_data = json.dumps(data)
 
     return render_template("index.html",
                             characters=characters,
-                            series=series,
-                            js_data = js_data)
+                            series=series)
                             # stuff I did w/ Steve 5/23
+                            # put this back in later
+                            # ,
+                            # js_data = js_data
 
 
 # This is the GET method; Dennis said I don't actually have to put "GET" in here
@@ -286,33 +288,11 @@ def get_info_for_char_d3():   # Naming?
         link = {}
         link["source"] = Character.by_id(r.char1_id).name
         link["target"] = Character.by_id(r.char2_id).name
-        link["value"] = 1   # Add this column to table & enter actual values; this is the "weight" of relationship
+        link["value"] = 1   # query this for chron_order from Series--will be used as "value" for graph slider
         json["links"].append(link)
 
 
-
-
     return jsonify(json)
-
-
-# EXAMPLE CODE FROM STACK OVERFLOW FOR REFERENCE
-
-# @app.route('/_get_companies')
-# def get_companies_json():
-#     companies = {}
-#     for c in session.query(Company).all():
-#         companies[c.id] = {
-#             'name': c.name,
-#             'homepage_url': c.homepage_url,
-#         }
-
-#     return jsonify(companies)
-
-    
-
-
-
-
 
 
 # What html templates do I still need?

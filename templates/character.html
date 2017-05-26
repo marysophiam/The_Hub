@@ -19,6 +19,7 @@
 
 </style>
 
+
   <h3>{{ character.name }}</h3>
   <p>{{ character.image }}<p>
   <p><b>Portrayed by:</b> {{ character.actor }}</p>
@@ -70,6 +71,7 @@ var svg = d3.select("svg"),
     height = +svg.attr("height");
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
+// look at different color palettes
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
@@ -84,26 +86,26 @@ d3.json("/characters.json", function(error, graph) {
     .selectAll("line")
     .data(graph.links)
     .enter().append("line")
-      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+      .attr("stroke-width", function(d) { return Math.sqrt(d.value); });  //could just give it an arbitrary number, skip function altogether
+      // will remove this in order to use "value" to refer to chron_order
 
   var node = svg.append("g")
       .attr("class", "nodes")
     .selectAll("circle")
     .data(graph.nodes)
     .enter().append("circle")
-      .attr("r", 5)
-      .attr("fill", function(d) { return color(d.group); })
+      .attr("r", 5)   // radius
+      .attr("fill", function(d) { return color(d.group); }) //change var color
       .call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended));
 
   node.append("title")
-      .text(function(d) { return d.id; });
-
+      .text(function(d) { return d.id; }); // this is the text that appears on hover over node
   simulation
       .nodes(graph.nodes)
-      .on("tick", ticked);
+      .on("tick", ticked); // don't mess with this
 
   simulation.force("link")
       .links(graph.links);
