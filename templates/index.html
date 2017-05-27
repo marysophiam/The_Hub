@@ -6,13 +6,22 @@
 
 {% block content %}
 
+<style>
+
+img {
+    width: 2%;
+    height: auto;
+}
+
+</style>
+
   <h3>Characters</h3>
   (imagine a pretty carousel...)
 
   <ul>
   {% for c in characters %}
-    <li><a href="/character/{{ c.name }}">{{ c.name }}</a>,
-    <a href="/character/{{ c.name }}">{{ c.image }}</a></li>
+    <li><a href="/character/{{ c.name }}">{{ c.name }}</a>
+    <a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></li>
   {% endfor %}
   </ul>
 
@@ -35,8 +44,6 @@
 <!--
 
 Alright...So what needs to happen on this page still?
-
-* Actual images (not placeholder)
 
 * Character order: Grouped by character type? (Doctor Regen, Companion, Torchwood, JACK)
 

@@ -7,13 +7,22 @@
     white-space: pre-wrap;
   }
 
+  img {
+    width: 20%;
+    height: auto;
+  }
+
+</style>
+
 </style>
 
 
   <h3>{{ character.name }}</h3>
-  <p>{{ character.image }}<p>
+  <img src="../{{ character.image }}">
   <p><b>Portrayed by:</b> {{ character.actor }}</p>
   <p id="bio"><b>Character Summary:</b><br>{{ char_bio }}<p>
+
+
 
 
   <b>Has interactions with:</b><br>
