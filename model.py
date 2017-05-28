@@ -8,6 +8,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+# TO DO:
+# Separate models into discrete files (this file is getting reeeally long)
+
 ########################################################################
 # Model definitions
 
@@ -25,11 +28,11 @@ class Character(db.Model):
     bio = db.Column(db.Text)
     image = db.Column(db.String(100))   # Will be a link to image URL
 
-    # If I comment this out, will it break things?
-    # Hate that I don't seem to be using this anymore in the server.py file,
-    # really like Steve's strategy of taking all querying out of that file &
-    # just having it all in here...Class methods are cool!
 
+    @classmethod
+    def all(cls):
+        q = cls.query
+        return q.all()
 
     # ASK STEVE ABOUT COMBINING THESE 2 LIKE WE TALKED ABOUT...
 
@@ -50,22 +53,22 @@ class Character(db.Model):
         c = q.first()
         return c
 
+    # TO DO
+    # This will be used in display_character(), post_character_rating(), where else?
+
     # @classmethod
     # def filter_by():
 
     #     pass
-   
-    @classmethod
-    def all(cls):
-        q = cls.query
-        return q.all()
 
+    # For future feature to allow users to add a character to db
     # @classmethod
     # def new(cls, name, actor, bio, image):
     #     # c = create obj
     #     # c.insert()
     #     return c
 
+    # Is this a @staticmethod ? (think so)
     def relationships(self):
         # find relationships
 
@@ -87,23 +90,23 @@ class Character(db.Model):
         return chars
 
 
-    # TO DO (after MVP):
-    # Consider separating character/relationship/series models into separate files
-
     appearances = db.relationship("Series",
                                   secondary="character_series",
                                   backref="characters")
 
 
-    @staticmethod
-    def first_appears(char_id):
-        """Determine first series a character appears in."""
+    # Not needed at present: entering manually because a link between characters
+    # isn't necessarily established right when a character enters the timeline.
 
-        series_in = Character.by_id(char_id).appearances
-        series_set = {s.chron_order for s in series_in}
-        first = min(series_set)
+    # @staticmethod
+    # def first_appears(char_id):
+    #     """Determine first series a character appears in."""
 
-        return first
+    #     series_in = Character.by_id(char_id).appearances
+    #     series_set = {s.chron_order for s in series_in}
+    #     first = min(series_set)
+
+    #     return first
 
 
     def __repr__(self):
@@ -113,7 +116,7 @@ class Character(db.Model):
 
 
 class Relationship(db.Model):
-    """Association table: connects Character table to itself.
+    """Middle table: connects Character table to itself.
        Pairs of characters that have interacted with each other in some way."""
 
     __tablename__ = 'relationships'
@@ -121,20 +124,8 @@ class Relationship(db.Model):
     rel_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char1_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
+    # TO DO: Need to reverse order in .csv file for the D3 slider
     link_est = db.Column(db.Integer)
-
-
-    # Am I on the right track here....do I even need to add this here or do something else somewhere else? MEHHH
-
-    # char1_name = db.Column(db.String(50), db.ForeignKey('characters.name'))
-
-
-    # instance method
-    # determine the time step relationship link should appear on D3
-    # will be whichever series occurs later between 2
-    # 
-
-
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -155,11 +146,10 @@ class Series(db.Model):
     chron_order = db.Column(db.Integer)
     image = db.Column(db.String(100))   # Will be a link to image URL
 
-    # @classmethod
-    # def by_id(cls, series_id):
-    #     q = cls.query.filter_by(series_id=series_id)
-    #     s = q.first()
-    #     return s
+    @classmethod
+    def all(cls):
+        q = cls.query
+        return q.all()
 
     @classmethod
     def by_id(cls, series_id):
@@ -167,10 +157,12 @@ class Series(db.Model):
         s = q.first()
         return s
 
+    # Added 5/28, not used yet
     @classmethod
-    def all(cls):
-        q = cls.query
-        return q.all()
+    def by_name(cls, name):
+        q = cls.query.filter_by(name=name)
+        s = q.first()
+        return s
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -193,13 +185,6 @@ class CharacterSeries(db.Model):
 
         return "<Appearance character=%s series=%s>" % (self.character, self.series)
 
-
-# TO-DO: Create user account in order to rate/vote on characters
-# Need this because: don't want unregistered users to be able to vote;
-#   A single user can only rate a character once--otherwise, someone could
-#   (for example) upvote Eleven repeatedly, even though Ten is clearly the
-#   best Doctor.
-# Plus it looks good to have a login/logout/account creation feature.
 
 class User(db.Model):
     """A user of the app who will rate characters."""

@@ -28,8 +28,8 @@ def display_index():
 
     return render_template("index.html",
                             characters=characters,
-                            js_data = js_data,
-                            series=series)
+                            series=series,
+                            js_data = js_data)
                             # stuff I did w/ Steve 5/23
 
 
@@ -285,9 +285,9 @@ def get_info_for_d3():   # Naming?
 
         # This did what it was supposed to. But--it doesn't account for the
         # fact that 2 characters may have not met each other in the same series
-        # that they both appeared in the Whoniverse. I'm going to have to do
-        # this manually (like all the rest of my data) in order to ensure an
-        # accurate representation.
+        # in which they both initially existed concurrently in the Whoniverse. 
+        # I'm going to have to do this manually (like all the rest of my data)
+        # in order to ensure an accurate representation.
 
         # if Character.first_appears(r.char1_id) > Character.first_appears(r.char2_id):
         #     link["value"] = str(Character.first_appears(r.char1_id))
@@ -304,10 +304,8 @@ def show_d3():
     return render_template("connections.html")
 
 
-
 # What html templates do I still need?
-# --Splash
-# --Voting/Quiz?  # Only if time at very end (not likely right now)
+# - Voting/Quiz?  # Only if time at very end (not likely right now)
 
 
 if __name__ == "__main__":
