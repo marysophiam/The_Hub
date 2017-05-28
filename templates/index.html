@@ -8,12 +8,21 @@
 
 <style>
 
+/* Obviously, this will change once page layout, bootstrapping, etc. is worked out */
 img {
     width: 2%;
     height: auto;
 }
 
 </style>
+
+
+<!-- ADD CHARACTERS CAROUSEL HERE -->
+
+<!-- ADD SERIES CAROUSEL HERE -->
+
+<!-- MOVE & EDIT CODE BELOW INTO CAROUSEL ACCORDINGLY -->
+
 
   <h3>Characters</h3>
   (imagine a pretty carousel...)
@@ -30,8 +39,8 @@ img {
 
   <ul>
   {% for s in series %}
-    <li><a href="/series/{{ s.name }}">{{ s.name }}</a>,
-    <a href="/series/{{ s.name }}">{{ s.image }}</a></li>
+    <li><a href="/series/{{ s.name }}">{{ s.name }}</a>
+    <a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></li>
   {% endfor %}
   </ul>
 
@@ -39,6 +48,13 @@ img {
   <hr>
 
 {% endblock %}
+
+
+
+
+
+
+
 
 
 <!--

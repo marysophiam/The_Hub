@@ -7,10 +7,17 @@
     white-space: pre-wrap;
   }
 
+  img {
+    width: 20%;
+    height: auto;
+  }
+
 </style>
 
+<!-- ADD DIVS, ETC, TO CREATE LAYOUT -->
+
   <h3>{{ series.name }}</h3>
-  <p>{{ series.image }}<p>
+  <img src="../{{ series.image }}">
   <p><b>Initial air date:</b> {{ series.date }}</p>
   <p id="syn"><b>Synopsis:</b> {{ synopsis }}<p>
 

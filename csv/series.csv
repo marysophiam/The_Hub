@@ -1,16 +1,16 @@
-Doctor Who Series 1,csv/series_synopsis_txt/series_1.txt,2005,1,(image)
-Doctor Who Series 2,csv/series_synopsis_txt/series_2.txt,2006,2,(image)
-Doctor Who Series 3,csv/series_synopsis_txt/series_3.txt,2007,4,(image)
-Doctor Who Series 4,csv/series_synopsis_txt/series_4.txt,2008,6,(image)
-Doctor Who: The Specials (2008-2010),csv/series_synopsis_txt/specials_2008-2010.txt,2008-2010,7,(image)
-Doctor Who Series 5,csv/series_synopsis_txt/series_5.txt,2010,9,(image)
-Doctor Who Series 6,csv/series_synopsis_txt/series_6.txt,2011,10,(image)
-Doctor Who Series 7,csv/series_synopsis_txt/series_7.txt,2012-2013,12,(image)
-Doctor Who: The Specials (2013),csv/series_synopsis_txt/specials_2013.txt,2013,13,(image)
-Doctor Who Series 8,csv/series_synopsis_txt/series_8.txt,2014,14,(image)
-Doctor Who Series 9,csv/series_synopsis_txt/series_9.txt,2015,15,(image)
-Doctor Who Series 10,csv/series_synopsis_txt/series_10.txt,2017,16,(image)
-Torchwood Series 1,csv/series_synopsis_txt/tw_1.txt,2006-2007,3,(image)
-Torchwood Series 2,csv/series_synopsis_txt/tw_2.txt,2008,5,(image)
-Torchwood: Children of Earth,csv/series_synopsis_txt/tw_coe.txt,2009,8,(image)
-Torchwood: Miracle Day,csv/series_synopsis_txt/tw_md.txt,2011,11,(image)
+Doctor Who Series 1,csv/series_synopsis_txt/series_1.txt,2005,1,static/img/series/doctor_who_series_1.jpg
+Doctor Who Series 2,csv/series_synopsis_txt/series_2.txt,2006,2,static/img/series/doctor_who_series_2.jpg
+Doctor Who Series 3,csv/series_synopsis_txt/series_3.txt,2007,4,static/img/series/doctor_who_series_3.jpg
+Doctor Who Series 4,csv/series_synopsis_txt/series_4.txt,2008,6,static/img/series/doctor_who_series_4.jpg
+Doctor Who: The Specials (2008-2010),csv/series_synopsis_txt/specials_2008-2010.txt,2008-2010,7,static/img/series/doctor_who_specials_2008-2010.jpg
+Doctor Who Series 5,csv/series_synopsis_txt/series_5.txt,2010,9,static/img/series/doctor_who_series_5.jpg
+Doctor Who Series 6,csv/series_synopsis_txt/series_6.txt,2011,10,static/img/series/doctor_who_series_6.jpg
+Doctor Who Series 7,csv/series_synopsis_txt/series_7.txt,2012-2013,12,static/img/series/doctor_who_series_7.jpg
+Doctor Who: The Specials (2013),csv/series_synopsis_txt/specials_2013.txt,2013,13,static/img/series/doctor_who_specials_2013.jpg
+Doctor Who Series 8,csv/series_synopsis_txt/series_8.txt,2014,14,static/img/series/doctor_who_series_8.jpg
+Doctor Who Series 9,csv/series_synopsis_txt/series_9.txt,2015,15,static/img/series/doctor_who_series_9.jpg
+Doctor Who Series 10,csv/series_synopsis_txt/series_10.txt,2017,16,static/img/series/doctor_who_series_10.jpg
+Torchwood Series 1,csv/series_synopsis_txt/tw_1.txt,2006-2007,3,static/img/series/torchwood_series_1.jpg
+Torchwood Series 2,csv/series_synopsis_txt/tw_2.txt,2008,5,static/img/series/torchwood_series_2.jpg
+Torchwood: Children of Earth,csv/series_synopsis_txt/tw_coe.txt,2009,8,static/img/series/torchwood_children_of_earth.jpg
+Torchwood: Miracle Day,csv/series_synopsis_txt/tw_md.txt,2011,11,static/img/series/torchwood_miracle_day.jpg

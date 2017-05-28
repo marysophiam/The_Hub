@@ -125,6 +125,7 @@ class Relationship(db.Model):
     char1_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     # TO DO: Need to reverse order in .csv file for the D3 slider
+    # Threshold for D3 slider
     link_est = db.Column(db.Integer)
 
     def __repr__(self):
