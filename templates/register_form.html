@@ -2,27 +2,25 @@
 {% block content %}
 
 <h1>Register to become a Time Agent:</h1>
-<form action="register" method="POST">
+<form action="/register" method="POST">
 
-  <div>
-    <label>
-      Email
-      <input type="email" name="email">
+  <div class="form-group">
+    <label>Email:
+      <input type="email" name="email" required class="form-control">
     </label>
   </div>
 
   <br>
 
-  <div>
-    <label>
-      Password
-      <input type="password" name="password">
+  <div class="form-group">
+    <label>Password:
+      <input type="password" name="password" required class="form-control">
     </label>
   </div>
 
   <br>
 
-  <div>
+  <div class="form-group">
     <input type="submit" value="Allons-y!">
   </div>
 
