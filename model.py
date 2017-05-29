@@ -126,7 +126,7 @@ class Relationship(db.Model):
     char2_id = db.Column(db.Integer, db.ForeignKey('characters.char_id'))
     # TO DO: Need to reverse order in .csv file for the D3 slider
     # Threshold for D3 slider
-    link_est = db.Column(db.Integer)
+    threshold = db.Column(db.Integer)
 
     def __repr__(self):
         """Provide helpful representation when printed"""
@@ -144,7 +144,7 @@ class Series(db.Model):
     synopsis = db.Column(db.Text)
     # changed from DateTime to account for series which occur over multiple years
     date = db.Column(db.String(10))
-    chron_order = db.Column(db.Integer)
+    chron_order = db.Column(db.Integer) # not needed anymore, remove
     image = db.Column(db.String(100))   # Will be a link to image URL
 
     @classmethod
