@@ -3,3 +3,8 @@ body {
     background-size: 100%;
     color: #FFFFFF;
 }
+
+/* Why doesn't this work, grrr */
+/*.navbar-default {
+    background-color: 406aff;
+}*/

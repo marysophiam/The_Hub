@@ -17,6 +17,11 @@
   stroke-width: 1.5px;
 }
 
+svg {
+  display: block;
+  margin: auto;
+}
+
 </style>
 
 <svg width="1200" height="600"></svg>
@@ -32,8 +37,8 @@ var color = d3.scaleOrdinal(d3.schemeCategory10);
 // look at different color palettes
 
 var simulation = d3.forceSimulation()
-    .force("link", d3.forceLink().id(function(d) { return d.id; }))//.strength(n)
-    .force("charge", d3.forceManyBody())
+    .force("link", d3.forceLink().id(function(d) { return d.id; }))//.strength()
+    .force("charge", d3.forceManyBody().strength(-175))
     .force("center", d3.forceCenter(width / 2, height / 2));
 
 d3.json("/characters.json", function(error, graph) {
@@ -52,7 +57,7 @@ d3.json("/characters.json", function(error, graph) {
     .selectAll("circle")
     .data(graph.nodes)
     .enter().append("circle")
-      .attr("r", 5)   // radius
+      .attr("r", 7)   // radius
       .attr("fill", function(d) { return color(d.group); }) //change var color
       .call(d3.drag()
           .on("start", dragstarted)

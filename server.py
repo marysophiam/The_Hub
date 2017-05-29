@@ -280,7 +280,7 @@ def get_info_for_d3():   # Naming?
         link = {}
         link["source"] = Character.by_id(r.char1_id).name
         link["target"] = Character.by_id(r.char2_id).name
-        link["value"] = str(r.link_est)     # YAAAASSSS IT WORKED
+        link["value"] = str(r.threshold)     # YAAAASSSS IT WORKED
         json["links"].append(link)
 
         # This did what it was supposed to. But--it doesn't account for the
@@ -314,6 +314,8 @@ if __name__ == "__main__":
 
     # Do not debug for demo
     app.debug = True
+
+    app.jinja_env.auto_reload = True
 
     connect_to_db(app)
 
