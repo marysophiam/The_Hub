@@ -10,11 +10,126 @@
 
 /* Obviously, this will change once page layout, bootstrapping, etc. is worked out */
 img {
-    width: 2%;
+    width: 65%;
     height: auto;
 }
 
+.carousel{
+  width: 85%;
+  margin: auto;
+}
+
 </style>
+
+<style type="text/css">
+    carousel item {
+      /*height: 300px;
+      background: #FFF9CD;
+      border: 4px solid #00B5B0;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 30px;*/
+    }
+</style>
+
+
+<div class="carousel">
+<script src="static/lib/MultiCarousel.js"></script>
+
+  <carousel id="MyCarousel">
+    {% for c in characters %}
+    <item><a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></item>
+  {% endfor %}
+
+    <!-- <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item> -->
+  </carousel>
+  <div>
+    Methods:<br />
+    <button onclick="previous()">Previous</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="start()">Start</button>
+    <button onclick="next()">Next</button>
+  </div>
+  <script>
+    var carousel = new MultiCarousel({
+      target: document.getElementById('MyCarousel'),
+      data: {
+        delay: 2000,
+        items: Array.prototype.slice.call(document.getElementById('MyCarousel').children),
+        count: 5
+      }
+    });
+    function previous() {
+      carousel.previous();
+    }
+    function pause() {
+      carousel.pause();
+    }
+    function start() {
+      carousel.start();
+    }
+    function next() {
+      carousel.next();
+    }
+  </script>
+  </div>
+
+
+  <!--  FIX THIS SO IT DOESN'T BREAK WITH 2 CAROUSELS! -->
+
+
+  <!-- <div class="carousel">
+<script src="static/lib/MultiCarousel.js"></script>
+
+  <carousel id="MyCarousel">
+    {% for s in series %}
+    <item><a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></item>
+  {% endfor %}
+  </carousel>
+  <div>
+    Methods:<br />
+    <button onclick="previous()">Previous</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="start()">Start</button>
+    <button onclick="next()">Next</button>
+  </div>
+  <script>
+    var carousel = new MultiCarousel({
+      target: document.getElementById('MyCarousel'),
+      data: {
+        delay: 2000,
+        items: Array.prototype.slice.call(document.getElementById('MyCarousel').children),
+        count: 5
+      }
+    });
+    function previous() {
+      carousel.previous();
+    }
+    function pause() {
+      carousel.pause();
+    }
+    function start() {
+      carousel.start();
+    }
+    function next() {
+      carousel.next();
+    }
+  </script>
+  </div>
+ -->
+
+
+
+
+
+
 
 <!-- ADD CHARACTERS CAROUSEL HERE -->
 
@@ -23,7 +138,7 @@ img {
 <!-- MOVE & EDIT CODE BELOW INTO CAROUSEL ACCORDINGLY -->
 
 
-  <h3>Characters</h3>
+  <!-- <h3>Characters</h3>
   (imagine a pretty carousel...)
 
   <ul>
@@ -44,7 +159,7 @@ img {
   </ul>
 
   <br>
-  <hr>
+  <hr> -->
 
 {% endblock %}
 
