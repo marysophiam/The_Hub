@@ -298,14 +298,20 @@ def get_info_for_d3():   # Naming?
 
 
 # Render template for connections.html
-@app.route("/visualize")
+@app.route('/visualize')
 def show_d3():
 
     return render_template("connections.html")
 
 
-# What html templates do I still need?
-# - Voting/Quiz?  # Only if time at very end (not likely right now)
+
+# TEST FOR D3 W/ BREAKING LINKS/THRESHOLD SLIDER
+
+@app.route('/test')
+def test_d3():
+
+    return render_template("d3_test.html")
+
 
 
 if __name__ == "__main__":
