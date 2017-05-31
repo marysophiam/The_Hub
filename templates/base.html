@@ -4,7 +4,7 @@
   <title>The Hub</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='the_hub.css') }}">
-<!--   Example code w/ Steve 5/23, leaving here for now, messing things up otherwise--> 
+
  {% block html_head %}
  {% endblock %}
 
@@ -21,16 +21,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">THE HUB</a>
+        <a class="navbar-brand" href="/">THE HUB</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
-          <li><a href="#">Characters</a></li>
-          <li><a href="#">Series</a></li>
-          <li><a href="#">Connections</a></li>
+
+          <!-- Not sure that I actually need these? -->
+          <!-- <li><a href="#">Characters</a></li>
+          <li><a href="#">Series</a></li> -->
+          <li><a href="/visualize">Connections</a></li>
         </ul>
         <!-- <form class="navbar-form navbar-left">
           <div class="form-group">
@@ -40,8 +42,17 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
         <!-- Figure out what's gonna go here -->
-          <li><a href="#">Login/Logout</a></li>
-          <li><a href="#">Register/Users/Profile</a></li>
+        {% if "user_id" in session %}
+        <!-- PROFILE: how to link? -->
+          <li><a href='/users/<int:user_id>'>Profile</a></li>
+          <li><a href='/users'>Users</a></li>
+          <li><a href='/logout'>Logout</a></li>
+        {% else %}
+          <li><a href='/login'>Login</a></li>
+          <li><a href='/register'>Register</a></li>
+        {% endif %}
+          <!-- <li><a href="#">Login/Logout</a></li>
+          <li><a href="#">Register/Users/Profile</a></li> -->
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -49,18 +60,19 @@
 
 <!-- Needs Bootstrap navbar -->
 
-<h1><a href='/'>The Hub</a></h1>
+<!-- <h1><a href='/'>The Hub</a></h1> -->
 
-{% if "user_id" in session %}
+<!-- {% if "user_id" in session %}
     <a href='/logout'>Logout</a>
     <a href='/users'>Users</a>
 {% else %}
     <a href='/login'>Login</a>
     <a href='/register'>Register</a>
-{% endif %}
-<a href='/visualize'><b><font size="5" color="firebrick">Connections</font></b></a>
+{% endif %} -->
 
-<hr>
+<!-- <a href='/visualize'><b><font size="5" color="firebrick">Connections</font></b></a> -->
+
+<!-- <hr> -->
 
 {% for flash in get_flashed_messages() %}
   {{ flash }}

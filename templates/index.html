@@ -8,17 +8,38 @@
 
 <style>
 
-/* Obviously, this will change once page layout, bootstrapping, etc. is worked out */
-img {
-    width: 65%;
-    height: auto;
+.headings {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
 }
 
-.carousel{
-  width: 85%;
+/* Obviously, this will change once page layout, bootstrapping, etc. is worked out */
+img {
+    width: 60%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.carousel {
+  width: 80%;
   margin: auto;
 }
 
+/* Want to make top carousel slightly larger (and therefore longer) so bottom
+one doesn't cross over TARDIS on background */
+
+/*#characterCarousel {
+  width 80%;
+  margin: auto;
+}
+
+#seriesCarousel {
+  width: 70%;
+  margin: auto;
+}
+*/
 </style>
 
 <style type="text/css">
@@ -30,27 +51,20 @@ img {
       text-align: center;
       font-size: 30px;*/
     }
-    
 </style>
 
+<h1 class="headings">CHARACTERS</h1><br>
 
 <div class="carousel">
 <script src="static/lib/MultiCarousel.js"></script>
 
-  <carousel id="MyCarousel">
+  <carousel id="characterCarousel">
     {% for c in characters %}
     <item><a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></item>
-  {% endfor %}
-
-    <!-- <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item> -->
+    {% endfor %}
   </carousel>
+
+  <!-- Hiding buttons, all I need is the pause in the carousel itself
   <div>
     Methods:<br />
     <button onclick="previous()">Previous</button>
@@ -58,12 +72,14 @@ img {
     <button onclick="start()">Start</button>
     <button onclick="next()">Next</button>
   </div>
+  -->
+
   <script>
     var carousel = new MultiCarousel({
-      target: document.getElementById('MyCarousel'),
+      target: document.getElementById('characterCarousel'),
       data: {
         delay: 2000,
-        items: Array.prototype.slice.call(document.getElementById('MyCarousel').children),
+        items: Array.prototype.slice.call(document.getElementById('characterCarousel').children),
         count: 5
       }
     });
@@ -80,108 +96,61 @@ img {
       carousel.next();
     }
   </script>
-  </div>
-
-
-  <!--  FIX THIS SO IT DOESN'T BREAK WITH 2 CAROUSELS! -->
-
-
-  <!-- <div class="carousel">
-<script src="static/lib/MultiCarousel.js"></script>
-
-  <carousel id="MyCarousel">
-    {% for s in series %}
-    <item><a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></item>
-  {% endfor %}
-  </carousel>
-  <div>
-    Methods:<br />
-    <button onclick="previous()">Previous</button>
-    <button onclick="pause()">Pause</button>
-    <button onclick="start()">Start</button>
-    <button onclick="next()">Next</button>
-  </div>
-  <script>
-    var carousel = new MultiCarousel({
-      target: document.getElementById('MyCarousel'),
-      data: {
-        delay: 2000,
-        items: Array.prototype.slice.call(document.getElementById('MyCarousel').children),
-        count: 5
-      }
-    });
-    function previous() {
-      carousel.previous();
-    }
-    function pause() {
-      carousel.pause();
-    }
-    function start() {
-      carousel.start();
-    }
-    function next() {
-      carousel.next();
-    }
-  </script>
-  </div>
- -->
-
-
-
-
-
-
-
-<!-- ADD CHARACTERS CAROUSEL HERE -->
-
-<!-- ADD SERIES CAROUSEL HERE -->
-
-<!-- MOVE & EDIT CODE BELOW INTO CAROUSEL ACCORDINGLY -->
-
-
-  <!-- <h3>Characters</h3>
-  (imagine a pretty carousel...)
-
-  <ul>
-  {% for c in characters %}
-    <li><a href="/character/{{ c.name }}">{{ c.name }}</a>
-    <a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></li>
-  {% endfor %}
-  </ul>
-
-  <h3>Series</h3>
-  (imagine a pretty carousel...)
-
-  <ul>
-  {% for s in series %}
-    <li><a href="/series/{{ s.name }}">{{ s.name }}</a>
-    <a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></li>
-  {% endfor %}
-  </ul>
+</div>
 
   <br>
-  <hr> -->
+
+<h1 class="headings">SERIES</h1><br>
+
+<div class="carousel">
+<script src="static/lib/MultiCarousel.js"></script>
+
+  <carousel id="seriesCarousel">
+    {% for s in series %}
+    <item><a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></item>
+    {% endfor %}
+  </carousel>
+
+  <!--Hiding buttons, all I need is the pause in the carousel itself
+  <div>
+    Methods:<br />
+    <button onclick="previous()">Previous</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="start()">Start</button>
+    <button onclick="next()">Next</button>
+  </div>
+  -->
+
+  <!-- Can I just use this once? How? -->
+  <script>
+    var carousel = new MultiCarousel({
+      target: document.getElementById('seriesCarousel'),
+      data: {
+        delay: 2000,
+        items: Array.prototype.slice.call(document.getElementById('seriesCarousel').children),
+        count: 5
+      }
+    });
+    function previous() {
+      carousel.previous();
+    }
+    function pause() {
+      carousel.pause();
+    }
+    function start() {
+      carousel.start();
+    }
+    function next() {
+      carousel.next();
+    }
+  </script>
+  </div>
 
 {% endblock %}
 
+<!-- 
 
-
-
-
-
-
-
-
-<!--
-
-Alright...So what needs to happen on this page still?
-
-* Character order: Grouped by character type? (Doctor Regen, Companion, Torchwood, JACK)
-
-* Series names/actual images IN ORDER (by DW, then TW)
-
-* Navbar
-
-* Search? (Probably not, no time to add add'l features at this point, maybe later)
+Things to add still:
+* Search box?
 
 -->
