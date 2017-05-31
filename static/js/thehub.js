@@ -10,7 +10,7 @@ function init_d3() {
     .size([width, height]);
 
   var x = d3.scale.linear()
-    .domain([0, 16])
+    .domain([16, 0])
     .range([250, 80])
     .clamp(true);
 
@@ -57,7 +57,7 @@ function init_d3() {
     .attr("text-anchor", "end")
     .attr("font-size", "12px")
     .style("opacity", 0.5)
-    .text("co-occurence threshold")
+    .text("Timeline")
 
   d3.json("/characters.json", function(error, graph) {
     if (error) throw error;
@@ -117,7 +117,7 @@ function init_d3() {
 
     node
       .append("title")
-      .text(funtion(d) { return d.name; });
+      .text(function(d) { return d.name; });
 
     brush.on("brush", brushed);
 

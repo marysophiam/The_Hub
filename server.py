@@ -31,7 +31,6 @@ def display_index():
                             series=series,
                             js_data = js_data)
                             # stuff I did w/ Steve 5/23
-                    # Need to deal with getting rid of that now that it's not needed...
 
 
 # This is the GET method; Dennis said I don't actually have to put "GET" in here
@@ -338,23 +337,23 @@ def show_d3():
 # TESTS FOR D3 W/ BREAKING LINKS/THRESHOLD SLIDER
 # (delete eventually)
 
-# @app.route('/test')
-# def test_d3():
+@app.route('/test')
+def test_d3():
 
-#     return render_template("d3_test.html")
-
-
-# @app.route('/mis.json')
-# def get_info():
-
-#     text = open("miserables.json").read()
-#     return jsonify(json.loads(text))
+    return render_template("d3_test.html")
 
 
-# @app.route('/testmis')
-# def test_mis():
+@app.route('/mis.json')
+def get_info():
 
-#     return render_template("testmis.html")
+    text = open("miserables.json").read()
+    return jsonify(json.loads(text))
+
+
+@app.route('/testmis')
+def test_mis():
+
+    return render_template("testmis.html")
 
 
 
@@ -369,7 +368,7 @@ if __name__ == "__main__":
 
     connect_to_db(app)
 
-    # Use the DebugToolbar  # This thing is annoying...
-    DebugToolbarExtension(app)
+    # Use the DebugToolbar
+    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
