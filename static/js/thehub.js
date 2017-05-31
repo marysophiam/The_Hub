@@ -1,17 +1,19 @@
 function init_d3() {
-  var width = 960;
-  var height = 500;
+  var width = 1280;
+  var height = 580;
 
   var color = d3.scale.category10();
 
   var force = d3.layout.force()
-    .charge(-120)
-    .linkDistance(30)
+    .charge(-400)
+    .linkDistance(110)
     .size([width, height]);
 
+  // domain is timeline; range is literal size of slider field  
+  // the wider the range, the longer the value of one step on the slider
   var x = d3.scale.linear()
     .domain([16, 0])
-    .range([250, 80])
+    .range([540, 100])
     .clamp(true);
 
   var brush = d3.svg.brush()
@@ -26,9 +28,13 @@ function init_d3() {
   var nodes_g = svg.append("g");
 
   // slider
+  // somewhere in here is where to change color of numbers on slider???
   svg.append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(" + (width - 20)  + ",0)")
+    //move this to match slider handle & text
+    // .attr("transform", "translate(" + (width - 20)  + ",0)")
+    .attr("transform", "translate(" + 1080  + ",0)")
+    .attr("fill", "white")
     .call(d3.svg.axis()
       .scale(x)
       .orient("left")
@@ -46,16 +52,23 @@ function init_d3() {
   slider.selectAll(".extent,.resize")
     .remove();
 
+  // slider handle
+  // OOOH I WANT A MINI-TARDIS FOR THE SLIDER HANDLE!!!
   var handle = slider.append("circle")
     .attr("class", "handle")
-    .attr("transform", "translate(" + (width - 20) + ",0)")
+    // move this to match slider & text
+    // .attr("transform", "translate(" + (width - 20) + ",0)")
+    .attr("transform", "translate(" + 1080 + ",0)")
     .attr("r", 5);
 
   svg.append("text")
-    .attr("x", width - 15)
-    .attr("y", 60)
+    // x & y are location of text (above slider)
+    .attr("x", 1080)
+    .attr("y", 75)
     .attr("text-anchor", "end")
-    .attr("font-size", "12px")
+    .attr("font-size", "20px")
+    // This changes .text color, but not numbers next to slider
+    .attr("fill", "white")
     .style("opacity", 0.5)
     .text("Timeline")
 
@@ -74,7 +87,8 @@ function init_d3() {
       handle.attr("cy", x(value));
       var threshold = value;
       
-      var thresholded_links = graph.links.filter(function(d){ return (d.value > threshold);});
+      // threshold now <= value (instead of >); means timeline is start to end
+      var thresholded_links = graph.links.filter(function(d){ return (d.value <= threshold);});
       
       force
         .links(thresholded_links);
@@ -84,7 +98,9 @@ function init_d3() {
 
       link.enter().append("line")
         .attr("class", "link")
-        .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+        .style("stroke-width", 3);
+        // If stroke width uses this function, links will be thicker the older the connection
+        // .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
       link.exit().remove();
 
@@ -111,7 +127,7 @@ function init_d3() {
       .data(graph.nodes)
       .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 5)
+        .attr("r", 8)
         .style("fill", function(d) { return color(d.group); })
         .call(force.drag);
 
@@ -122,7 +138,7 @@ function init_d3() {
     brush.on("brush", brushed);
 
     slider
-      .call(brush.extent([5, 5]))
+      .call(brush.extent([0, 0]))
       .call(brush.event);
 
   });

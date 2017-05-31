@@ -10,7 +10,7 @@ body {
 }*/
 
 svg {
-  background-color: white;
+/*  background-color: #001a33;*/
 }
 
 .node {
@@ -19,7 +19,7 @@ svg {
 }
 
 .link {
-  stroke: #999;
+  stroke: #fff;
   stroke-opacity: .6;
 }
 
@@ -33,7 +33,7 @@ svg {
 
 .axis .domain {
   fill: none;
-  stroke: #000;
+  stroke: #fff;
   stroke-opacity: .3;
   stroke-width: 4px;
   stroke-linecap: round;
