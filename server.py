@@ -7,6 +7,8 @@ from model import connect_to_db, db,Character, Relationship, Series, User, Chara
 
 import json
 
+import bcrypt
+
 
 app = Flask(__name__)
 
@@ -195,21 +197,28 @@ def login_process():
     # Get form variables
     email = request.form["email"]
     password = request.form["password"]
+    password = password.encode('utf8')
+    hashedpass = password.encode('utf8')
+
 
     user = User.query.filter_by(email=email).first()
+    hashedpass = user.password.encode('utf8')
 
     if not user:
         flash("No user with that email found, please register.")
         return redirect("/login")
 
-    if user.password != password:
+    if bcrypt.checkpw(password, hashedpass):
+        session["user_id"] = user.user_id
+        flash("Welcome to the Whoniverse.")
+        return redirect("/")
+    else:
         flash("Incorrect password, try again.")
         return redirect("/login")
 
-    session["user_id"] = user.user_id
+    
 
-    flash("Welcome to the Whoniverse.")
-    return redirect("/")
+    
 
 
 @app.route('/logout')
@@ -234,9 +243,11 @@ def register_process():
 
     # Get form variables
     email = request.form["email"]
-    password = request.form["password"]
+    password = request.form.get("password")
+    password = password.encode('utf8')
+    hashed = bcrypt.hashpw(password, bcrypt.gensalt())
 
-    new_user = User(email=email, password=password)
+    new_user = User(email=email, password=hashed)
 
     db.session.add(new_user)
     db.session.commit()

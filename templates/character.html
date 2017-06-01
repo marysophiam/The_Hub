@@ -8,23 +8,43 @@
   }
 
   img {
-    width: 20%;
+    width: 90%;
     height: auto;
+  }
+
+  .image {
+    float: left;
+  }
+
+  .info {
+    float: right;
+    margin: 5%;
   }
 
 </style>
 
-</style>
+<div>
+  <div class="image">
+      <img src="../{{ character.image }}">
+  </div>
+
+  <div class="info">
+
+  </div>
+</div>
+
+
 
 <!-- ADD DIVS, ETC, TO CREATE LAYOUT -->
 
-  <h3>{{ character.name }}</h3>
-  <img src="../{{ character.image }}">
+  <h2>{{ character.name }}</h2>
   <p><b>Portrayed by:</b> {{ character.actor }}</p>
   <p id="bio"><b>Character Summary:</b><br>{{ char_bio }}<p>
 
+  <br><br>
 
-  <b>Has interactions with:</b><br>
+
+  <b>Connected to:</b><br>
   {% for c in relationships %}
     <a href="/character/{{ c.name }}">{{ c.name }}</a>
     <br>

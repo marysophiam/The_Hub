@@ -44,7 +44,7 @@
         <!-- Figure out what's gonna go here -->
         {% if "user_id" in session %}
         <!-- PROFILE: how to link? -->
-          <li><a href='/users/<int:user_id>'>Profile</a></li>
+          <li><a href='/users/{{ session["user_id"] }}'>Profile</a></li>
           <li><a href='/users'>Users</a></li>
           <li><a href='/logout'>Logout</a></li>
         {% else %}

@@ -5,6 +5,8 @@ from model import connect_to_db, db, Character, Relationship, Series, User, Char
 
 from server import app
 
+import bcrypt
+
 
 def load_characters():
 
@@ -80,9 +82,12 @@ def load_users():
     for line in open("csv/users.csv"):
         line = line[:-1]
         email, password = line.split(',')
+        password = password.encode('utf8')
+        hashed = bcrypt.hashpw(password, bcrypt.gensalt())
 
         user = User(email=email,
-                    password=password)
+                    password=hashed)
+
 
         db.session.add(user)
 

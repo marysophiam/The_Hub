@@ -194,7 +194,7 @@ class User(db.Model):
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50))
-    password = db.Column(db.String(20))
+    password = db.Column(db.String(100))
     # display_name =    # May or may not use, not really needed for project
 
     def __repr__(self):
