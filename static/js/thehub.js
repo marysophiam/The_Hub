@@ -37,7 +37,7 @@ function init_d3() {
     .attr("fill", "white")
     .call(d3.svg.axis()
       .scale(x)
-      .orient("left")
+      .orient("left") // change this to "bottom" to display horizontally & adjust other things as necessary
       .tickFormat(function(d) { return d; })
       .tickSize(0)
       .tickPadding(12))
@@ -144,6 +144,21 @@ function init_d3() {
   });
 }
 
-window.onload = function() {
-  init_d3();
-}
+function setupCarousel(carouselName) {
+  var carousel = new MultiCarousel({
+        target: document.getElementById(carouselName),
+        data: {
+          delay: 2000,
+          items: Array.prototype.slice.call(document.getElementById(carouselName).children),
+          count: 5
+        }
+      });
+      document.getElementById(carouselName).style.display = "block";
+      // document.getElementById(carouselName + ".previous").onclick = function() {carousel.previous()}
+
+      // document.getElementById(carouselName + ".pause").onclick = function() {carousel.pause()}
+
+      // document.getElementById(carouselName + ".start").onclick = function() {carousel.start()}
+
+      // document.getElementById(carouselName + ".next").onclick = function() {carousel.next()}
+  }

@@ -57,45 +57,23 @@ one doesn't cross over TARDIS on background */
 
 <div class="carousel">
 <script src="static/lib/MultiCarousel.js"></script>
+<script src="static/js/thehub.js"></script>
 
-  <carousel id="characterCarousel">
+  <carousel id="characterCarousel" style="display: none">
     {% for c in characters %}
     <item><a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></item>
     {% endfor %}
   </carousel>
 
-  <!-- Hiding buttons, all I need is the pause in the carousel itself
+  <!-- Commented out, but displays buttons if desired
   <div>
-    Methods:<br />
-    <button onclick="previous()">Previous</button>
-    <button onclick="pause()">Pause</button>
-    <button onclick="start()">Start</button>
-    <button onclick="next()">Next</button>
-  </div>
-  -->
+    <button id="seriesCarousel.previous">Previous</button>
+    <button id="seriesCarousel.pause">Pause</button>
+    <button id="seriesCarousel.start">Start</button>
+    <button id="seriesCarousel.next">Next</button>
+  </div> -->
 
-  <script>
-    var carousel = new MultiCarousel({
-      target: document.getElementById('characterCarousel'),
-      data: {
-        delay: 2000,
-        items: Array.prototype.slice.call(document.getElementById('characterCarousel').children),
-        count: 5
-      }
-    });
-    function previous() {
-      carousel.previous();
-    }
-    function pause() {
-      carousel.pause();
-    }
-    function start() {
-      carousel.start();
-    }
-    function next() {
-      carousel.next();
-    }
-  </script>
+  
 </div>
 
   <br>
@@ -105,46 +83,28 @@ one doesn't cross over TARDIS on background */
 <div class="carousel">
 <script src="static/lib/MultiCarousel.js"></script>
 
-  <carousel id="seriesCarousel">
+
+  <carousel id="seriesCarousel" style="display: none">
     {% for s in series %}
     <item><a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></item>
     {% endfor %}
   </carousel>
 
-  <!--Hiding buttons, all I need is the pause in the carousel itself
+  <!-- Commented out, but displays buttons if desired
   <div>
-    Methods:<br />
-    <button onclick="previous()">Previous</button>
-    <button onclick="pause()">Pause</button>
-    <button onclick="start()">Start</button>
-    <button onclick="next()">Next</button>
-  </div>
-  -->
+    <button id="seriesCarousel.previous">Previous</button>
+    <button id="seriesCarousel.pause">Pause</button>
+    <button id="seriesCarousel.start">Start</button>
+    <button id="seriesCarousel.next">Next</button>
+  </div> -->
 
-  <!-- Can I just use this once? How? -->
   <script>
-    var carousel = new MultiCarousel({
-      target: document.getElementById('seriesCarousel'),
-      data: {
-        delay: 2000,
-        items: Array.prototype.slice.call(document.getElementById('seriesCarousel').children),
-        count: 5
-      }
-    });
-    function previous() {
-      carousel.previous();
-    }
-    function pause() {
-      carousel.pause();
-    }
-    function start() {
-      carousel.start();
-    }
-    function next() {
-      carousel.next();
+    window.onload = function() {
+    setupCarousel("characterCarousel");
+    setupCarousel("seriesCarousel");
     }
   </script>
-  </div>
+</div>
 
 {% endblock %}
 
