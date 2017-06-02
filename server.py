@@ -211,10 +211,6 @@ def login_process():
         flash("Incorrect password, try again.")
         return redirect("/login")
 
-    
-
-    
-
 
 @app.route('/logout')
 def logout():

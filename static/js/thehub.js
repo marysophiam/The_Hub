@@ -1,6 +1,6 @@
 function init_d3() {
-  var width = 1280;
-  var height = 580;
+  var width = 1240;
+  var height = 700;
 
   var color = d3.scale.category10();
 
@@ -13,7 +13,7 @@ function init_d3() {
   // the wider the range, the longer the value of one step on the slider
   var x = d3.scale.linear()
     .domain([16, 0])
-    .range([540, 100])
+    .range([600, 100])
     .clamp(true);
 
   var brush = d3.svg.brush()
@@ -27,18 +27,48 @@ function init_d3() {
   var links_g = svg.append("g");
   var nodes_g = svg.append("g");
 
+// Would be nice to have actual labels instead of just
+// numbered ticks. Well, at least I got them incremental by
+// 1 instead of just even numbers for now...
+
+  // var ticks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+  // var tickLabels = ['DW Series 1',
+  //                   'DW Series 2',
+  //                   'TW Series 1',
+  //                   'DW Series 3',
+  //                   'TW Series 2',
+  //                   'DW Series 4',
+  //                   'DW Sp. 2008-10',
+  //                   'TW: CoE',
+  //                   'DW Series 5',
+  //                   'DW Series 6',
+  //                   'TW: MD',
+  //                   'DW Series 7',
+  //                   'DW Sp. 2013',
+  //                   'DW Series 8',
+  //                   'DW Series 9',
+  //                   'DW Series 10'];
+
+  // Then in theory (doesn't work now, but...)
+  // Insert the following link below .tickValues
+  // and do this: .tickValues(ticks)
+  // .tickFormat(function(d,i){ return tickLabels[i] });
+  // Would be nice to have...
+
+
   // slider
   // somewhere in here is where to change color of numbers on slider???
   svg.append("g")
     .attr("class", "x axis")
     //move this to match slider handle & text
     // .attr("transform", "translate(" + (width - 20)  + ",0)")
-    .attr("transform", "translate(" + 1080  + ",0)")
+    .attr("transform", "translate(" + 1180  + ",0)")
     .attr("fill", "white")
     .call(d3.svg.axis()
       .scale(x)
       .orient("left") // change this to "bottom" to display horizontally & adjust other things as necessary
-      .tickFormat(function(d) { return d; })
+      // .tickFormat(function(d) { return d; })
+      .tickValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
       .tickSize(0)
       .tickPadding(12))
     .select(".domain")
@@ -58,19 +88,19 @@ function init_d3() {
     .attr("class", "handle")
     // move this to match slider & text
     // .attr("transform", "translate(" + (width - 20) + ",0)")
-    .attr("transform", "translate(" + 1080 + ",0)")
+    .attr("transform", "translate(" + 1180 + ",0)")
     .attr("r", 5);
 
   svg.append("text")
     // x & y are location of text (above slider)
-    .attr("x", 1080)
+    .attr("x", 1240)
     .attr("y", 75)
     .attr("text-anchor", "end")
     .attr("font-size", "20px")
     // This changes .text color, but not numbers next to slider
     .attr("fill", "white")
     .style("opacity", 0.5)
-    .text("Timeline")
+    .text("Chronological Timeline By Series Order")
 
   d3.json("/characters.json", function(error, graph) {
     if (error) throw error;
