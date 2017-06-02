@@ -1,6 +1,2 @@
 venv
 *pyc
-table_data_info.txt
-carousel_tests
-node_modules
-csv/characters.json

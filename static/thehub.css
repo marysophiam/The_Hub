@@ -6,7 +6,7 @@ body {
 
 .navbar-default {
   background-color: #406aff;
-  height: 52px;
+  height: 50px;
   border: 0;
 }
 
@@ -81,7 +81,7 @@ li a {
 /* For D3 */
 
 /*svg {
-  
+
 }*/
 
 .node {

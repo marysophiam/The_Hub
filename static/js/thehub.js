@@ -1,3 +1,6 @@
+// Would still *REALLY* like character name labels for D3 nodes,
+// and series names for slider ticks.
+
 function init_d3() {
   var width = 1240;
   var height = 700;
