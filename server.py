@@ -25,14 +25,9 @@ def display_index():
     characters = Character.all()
     series = Series.all()
 
-    data = {"data":[1,2,3,4,5]}
-    js_data = json.dumps(data)
-
     return render_template("index.html",
                             characters=characters,
-                            series=series,
-                            js_data = js_data)
-                            # stuff I did w/ Steve 5/23
+                            series=series)
 
 
 # This is the GET method; Dennis said I don't actually have to put "GET" in here

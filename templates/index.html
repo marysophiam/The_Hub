@@ -1,116 +1,42 @@
 {% extends 'base.html' %}
 
-{% block js_data %}
-  window.server_data = {{ js_data | safe }};
-{% endblock %}
-
 {% block content %}
 
-<style>
-
-.headings {
-  font-size: 3em;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Obviously, this will change once page layout, bootstrapping, etc. is worked out */
-img {
-    width: 60%;
-    height: auto;
-    display: block;
-    margin: auto;
-}
-
-.carousel {
-  width: 80%;
-  margin: auto;
-}
-
-/* Want to make top carousel slightly larger (and therefore longer) so bottom
-one doesn't cross over TARDIS on background */
-
-/*#characterCarousel {
-  width 80%;
-  margin: auto;
-}
-
-#seriesCarousel {
-  width: 70%;
-  margin: auto;
-}
-*/
-</style>
-
-<style type="text/css">
-    carousel item {
-      /*height: 300px;
-      background: #FFF9CD;
-      border: 4px solid #00B5B0;
-      box-sizing: border-box;
-      text-align: center;
-      font-size: 30px;*/
-    }
-</style>
+<script src="static/lib/MultiCarousel.js"></script>
+<script src="static/js/thehub.js"></script>
 
 <h1 class="headings">CHARACTERS</h1><br>
 
 <div class="carousel">
-<script src="static/lib/MultiCarousel.js"></script>
-<script src="static/js/thehub.js"></script>
 
   <carousel id="characterCarousel" style="display: none">
     {% for c in characters %}
-    <item><a href="/character/{{ c.name }}"><img src="../{{ c.image }}"></a></item>
+    <div class="relative">
+    <item><a href="/character/{{ c.name }}"><img class="car" src="../{{ c.image }}"></a>
+    <p class="absolute-text">{{ c.name }}</p></item>
+    </div>
     {% endfor %}
   </carousel>
-
-  <!-- Commented out, but displays buttons if desired
-  <div>
-    <button id="seriesCarousel.previous">Previous</button>
-    <button id="seriesCarousel.pause">Pause</button>
-    <button id="seriesCarousel.start">Start</button>
-    <button id="seriesCarousel.next">Next</button>
-  </div> -->
-
-  
 </div>
 
-  <br>
+<br>
 
 <h1 class="headings">SERIES</h1><br>
 
 <div class="carousel">
-<script src="static/lib/MultiCarousel.js"></script>
-
-
   <carousel id="seriesCarousel" style="display: none">
     {% for s in series %}
-    <item><a href="/series/{{ s.name }}"><img src="../{{ s.image }}"></a></item>
+      <item><a href="/series/{{ s.name }}"><img class="car" src="../{{ s.image }}"></a></item>
     {% endfor %}
   </carousel>
-
-  <!-- Commented out, but displays buttons if desired
-  <div>
-    <button id="seriesCarousel.previous">Previous</button>
-    <button id="seriesCarousel.pause">Pause</button>
-    <button id="seriesCarousel.start">Start</button>
-    <button id="seriesCarousel.next">Next</button>
-  </div> -->
-
-  <script>
-    window.onload = function() {
-    setupCarousel("characterCarousel");
-    setupCarousel("seriesCarousel");
-    }
-  </script>
 </div>
 
+<script>
+  window.onload = function() {
+  setupCarousel("characterCarousel");
+  setupCarousel("seriesCarousel");
+  }
+</script>
+
+
 {% endblock %}
-
-<!-- 
-
-Things to add still:
-* Search box?
-
--->

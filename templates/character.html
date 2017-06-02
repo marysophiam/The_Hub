@@ -5,16 +5,11 @@
 
   #bio {
     white-space: pre-wrap;
+    text-align: justify;
   }
 
-  /*img {
-    width: 90%;
-    height: auto;
-  }*/
-
-  .image {
-    float: left;
-    margin: 2%;
+  b i {
+    font-size: 16px;
   }
 
   .info {
@@ -22,48 +17,59 @@
     margin: 5%;
   }
 
-  .container{
+  /*.container {
     display: flex;
     margin-right: 12%;
-}
-.fixed{
-    width: 400px;
-}
-.flex-item{
+  }
+
+  .fixed{
+    width: 100px;
+  }
+  .flex-item {
     flex-grow: 1;
+  }*/
+
+  .parent {
+  display: flex;
 }
 
+.col-l {
+  width: 30%;
+  /*padding-top: 1%;*/
+  margin-left: 2%;
+}
+
+.col-r {
+  width: 70%;
+  /*padding-top: 1%;*/
+  margin-right: 13%
+}
+
+.image {
+  width: 90%;
+  height: auto;
+}
+
+.pg-title {
+  font-size: 38px;
+  font-weight: bold;
+}
 
 </style>
 
 
-<div class="container">
-  <div class="fixed"><img src="../{{ character.image }}"></div>
-  <div class="flex-item">
-    <h2>{{ character.name }}</h2>
-    <p><b>Portrayed by:</b> {{ character.actor }}</p>
-    <p id="bio"><b>Character Summary:</b><br>{{ char_bio }}<p>
+<div class="parent">
+  <div class="col-l">
+    <img class="image" src="../{{ character.image }}">
   </div>
+  <div class="col-r">
+    <h2 class="pg-title">{{ character.name }}</h2>
+    <p><b><i>Portrayed by:</i></b> {{ character.actor }}</p>
+    <p id="bio"><b><i>Character Summary:</i></b><br>{{ char_bio }}<p>
+  </div>  
 </div>
-
-<!-- <div>
-  <div class="image">
-      
-  </div>
-
-  <div class="info">
-    
-  </div>
-</div>
- -->
-
-
-<!-- ADD DIVS, ETC, TO CREATE LAYOUT -->
-
-  
 
   <br><br>
-
 
   <b>Connected to:</b><br>
   {% for c in relationships %}
@@ -99,8 +105,5 @@
     {% endif %}
   {% endif %}
   <p>{{ avg_rating }}</p>
-
-  <br>
-  <hr>
 
 {% endblock %}
