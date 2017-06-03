@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block html_head %}
+  <script src="static/lib/MultiCarousel.js"></script>
+  <script src="static/js/thehub.js"></script>
+{% endblock %}
 
-<script src="static/lib/MultiCarousel.js"></script>
-<script src="static/js/thehub.js"></script>
+{% block content %}
 
 <h1 class="headings">CHARACTERS</h1><br>
 
 <div class="carousel">
-
   <carousel id="characterCarousel" style="display: none">
     {% for c in characters %}
-    <div class="relative">
-    <item><a href="/character/{{ c.name }}"><img class="car" src="../{{ c.image }}"></a>
-    <p class="absolute-text">{{ c.name }}</p></item>
-    </div>
+      <div class="relative">
+        <item><a href="/character/{{ c.name }}"><img class="car-item" src="../{{ c.image }}"></a>
+        <p class="absolute-text">{{ c.name }}</p></item>
+      </div>
     {% endfor %}
   </carousel>
 </div>
@@ -26,7 +27,7 @@
 <div class="carousel">
   <carousel id="seriesCarousel" style="display: none">
     {% for s in series %}
-      <item><a href="/series/{{ s.name }}"><img class="car" src="../{{ s.image }}"></a></item>
+      <item><a href="/series/{{ s.name }}"><img class="car-item" src="../{{ s.image }}"></a></item>
     {% endfor %}
   </carousel>
 </div>
@@ -37,6 +38,5 @@
   setupCarousel("seriesCarousel");
   }
 </script>
-
 
 {% endblock %}

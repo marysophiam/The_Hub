@@ -1,25 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style type="text/css">
-
-  #syn {
-    white-space: pre-wrap;
-  }
-
-  img {
-    width: 20%;
-    height: auto;
-  }
-
-</style>
-
-<!-- ADD DIVS, ETC, TO CREATE LAYOUT -->
-
-  <h3>{{ series.name }}</h3>
-  <img src="../{{ series.image }}">
-  <p><b>Initial air date:</b> {{ series.date }}</p>
-  <p id="syn"><b>Synopsis:</b> {{ synopsis }}<p>
+  <div class="parent">
+  <div class="col-l">
+    <img class="image" src="../{{ series.image }}">
+  </div>
+  <div class="col-r">
+    <h2 class="pg-title">{{ series.name }}</h2>
+    <p><b><i>Initial aired::</i></b> {{ series.date }}</p>
+    <p id="syn"><b><i>Synopsis:</i></b><br>{{ synopsis }}<p>
+  </div>  
+</div>
 
   <b>Characters in this series:</b><br>
   {% for c in characters %}

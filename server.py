@@ -263,44 +263,6 @@ def display_user_info(user_id):
     return render_template("user.html", user=user)
 
 
-# OLD VERSION: NOOOOOPE!
-
-# @app.route("/characters.json")
-# def get_info_for_d3():   # Naming?
-
-#     json = {"nodes":[], "links":[]}
-
-#     characters = Character.all()
-#     relationships = Relationship.query.all()
-
-#     for c in characters:
-#         node = {}
-#         node["id"] = c.name
-#         node["group"] = c.group
-#         json["nodes"].append(node)
-
-#     for r in relationships:
-
-#         link = {}
-#         link["source"] = Character.by_id(r.char1_id).name
-#         link["target"] = Character.by_id(r.char2_id).name
-#         link["value"] = r.threshold    # YAAAASSSS IT WORKED
-#         json["links"].append(link)
-
-#         # This did what it was supposed to. But--it doesn't account for the
-#         # fact that 2 characters may have not met each other in the same series
-#         # in which they both initially existed concurrently in the Whoniverse. 
-#         # I'm going to have to do this manually (like all the rest of my data)
-#         # in order to ensure an accurate representation.
-
-#         # if Character.first_appears(r.char1_id) > Character.first_appears(r.char2_id):
-#         #     link["value"] = str(Character.first_appears(r.char1_id))
-#         # else:
-#         #     link["value"] = str(Character.first_appears(r.char2_id))
-
-#     return jsonify(json)
-
-
 @app.route("/characters.json")
 def get_data_for_d3():
 
@@ -333,30 +295,6 @@ def get_data_for_d3():
 def show_d3():
 
     return render_template("connections.html")
-
-
-
-# TESTS FOR D3 W/ BREAKING LINKS/THRESHOLD SLIDER
-# (delete eventually)
-
-@app.route('/test')
-def test_d3():
-
-    return render_template("d3_test.html")
-
-
-@app.route('/mis.json')
-def get_info():
-
-    text = open("miserables.json").read()
-    return jsonify(json.loads(text))
-
-
-@app.route('/testmis')
-def test_mis():
-
-    return render_template("testmis.html")
-
 
 
 if __name__ == "__main__":

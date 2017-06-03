@@ -1,49 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style type="text/css">
-
-/* Move all this into CSS file once you get layout sorted
-Play with it here for now so you don't get totally confused... */
-
-  #bio {
-    white-space: pre-wrap;
-    text-align: justify;
-  }
-
-  b i {
-    font-size: 16px;
-  }
-
-  .parent {
-  display: flex;
-}
-
-.col-l {
-  width: 30%;
-  /*padding-top: 1%;*/
-  margin-left: 2%;
-}
-
-.col-r {
-  width: 70%;
-  /*padding-top: 1%;*/
-  margin-right: 13%
-}
-
-.image {
-  width: 90%;
-  height: auto;
-}
-
-.pg-title {
-  font-size: 38px;
-  font-weight: bold;
-}
-
-</style>
-
-
 <div class="parent">
   <div class="col-l">
     <img class="image" src="../{{ character.image }}">
