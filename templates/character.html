@@ -1,22 +1,63 @@
 {% extends 'base.html' %}
+
+{% block html_head %}
+
+<style>
+.char-link {
+  width: 10%;
+  height: absolute;
+}
+
+.connection {
+  float: left;
+}
+</style>
+
+{% endblock %}
+
+
 {% block content %}
 
 <div class="parent">
+
   <div class="col-l">
     <img class="image" src="../{{ character.image }}">
+
+    <div>
+    <fieldset class="rating" style="float: left">
+      <h3 style="font-size: 18px">Rate {{ character.name }}: </h3>
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+      </fieldset>
   </div>
+
+  </div>
+
+
   <div class="col-r">
     <h2 class="pg-title">{{ character.name }}</h2>
     <p><b><i>Portrayed by:</i></b> {{ character.actor }}</p>
     <p id="bio"><b><i>Character Summary:</i></b><br>{{ char_bio }}<p>
   </div>  
+
 </div>
+
+  
+
+
+
+
 
   <br><br>
 
   <b>Connected to:</b><br>
   {% for c in relationships %}
-    <a href="/character/{{ c.name }}">{{ c.name }}</a>
+    <div>
+    <div class="connection"><a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a></div>
+    </div>
     <br>
   {% endfor %}
 
@@ -30,7 +71,16 @@
 
     <br>
 
-  {% if "user_id" in session %}
+
+  <!-- RATINGS SYSTEM
+  TO DO:
+  Below is the functional ratings system, but it isn't pretty right now.
+  Needs to be instegrated with 5* display.
+
+  http://rateyo.fundoocode.ninja/
+   -->
+
+  <!-- {% if "user_id" in session %}
     <h4>Character Rating:</h4>
     {% if user_rating %}
       <p>You rated this character {{ user_rating.score }} out of 5</p>
@@ -48,5 +98,15 @@
     {% endif %}
   {% endif %}
   <p>{{ avg_rating }}</p>
+ -->
+  <script>
+    $(function () {
+   
+    $("#rateYo").rateYo({
+      rating: 3.6
+    });
+   
+  });
+  </script>
 
 {% endblock %}
