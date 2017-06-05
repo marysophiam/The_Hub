@@ -2,13 +2,13 @@
 // and series names for slider ticks.
 
 function init_d3() {
-  var width = 1240;
-  var height = 700;
+  var width = 900;
+  var height = 550;
 
   var color = d3.scale.category10();
 
   var force = d3.layout.force()
-    .charge(-400)
+    .charge(-300)
     .linkDistance(110)
     .size([width, height]);
 
@@ -16,7 +16,7 @@ function init_d3() {
   // the wider the range, the longer the value of one step on the slider
   var x = d3.scale.linear()
     .domain([16, 0])
-    .range([600, 100])
+    .range([500, 50])
     .clamp(true);
 
   var brush = d3.svg.brush()
@@ -65,7 +65,7 @@ function init_d3() {
     .attr("class", "x axis")
     //move this to match slider handle & text
     // .attr("transform", "translate(" + (width - 20)  + ",0)")
-    .attr("transform", "translate(" + 1180  + ",0)")
+    .attr("transform", "translate(" + 850  + ",0)")
     .attr("fill", "white")
     .call(d3.svg.axis()
       .scale(x)
@@ -91,15 +91,15 @@ function init_d3() {
     .attr("class", "handle")
     // move this to match slider & text
     // .attr("transform", "translate(" + (width - 20) + ",0)")
-    .attr("transform", "translate(" + 1180 + ",0)")
+    .attr("transform", "translate(" + 850 + ",0)")
     .attr("r", 10);
 
   svg.append("text")
     // x & y are location of text (above slider)
-    .attr("x", 1240)
-    .attr("y", 75)
+    .attr("x", 900)
+    .attr("y", 15)
     .attr("text-anchor", "end")
-    .attr("font-size", "20px")
+    .attr("font-size", "22px")
     // This changes .text color, but not numbers next to slider
     .attr("fill", "white")
     .style("opacity", 0.5)

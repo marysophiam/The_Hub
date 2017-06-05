@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
-{% block html_head %}  <script src="https://d3js.org/d3.v3.min.js"></script>
+{% block html_head %}
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="static/js/thehub.js"></script>
   <script>
     window.onload = function() {
     init_d3();
     }
   </script>
-
+  
 {% endblock %}
 
 {% block content %}
+
+  <div id="vis-container" style="width: 22%; vertical-align: left;>
+  <h1 id="visualized">CHARACTER CONNECTIVITY<br>VISUALIZED</h1>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Proin euismod hendrerit est sed rutrum.<br>Quisque ornare sed quam id semper.<br>Integer et sagittis leo.<br>Nam accumsan orci quis fermentum commodo.<br>Duis iaculis porta lacinia.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Morbi vitae tortor maximus nisl feugiat pretium.<br>Quisque fringilla suscipit quam, non pretium erat interdum sit amet.<br>Donec vehicula pretium sem bibendum finibus.<br>Nunc sed accumsan enim.<br>Phasellus maximus convallis velit, convallis semper ante accumsan a.<br>Quisque velit purus, commodo feugiat elit cursus,<br>ullamcorper commodo metus.<br>Vivamus eget dui laoreet, malesuada nisl vel, egestas tortor.<br>Pellentesque convallis accumsan.</p>
+
+  </div>
 
 {% endblock %}
