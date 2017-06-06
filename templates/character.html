@@ -4,7 +4,7 @@
 
 <style>
 .char-link {
-  width: 10%;
+  width: 6.5%;
   height: absolute;
 }
 
@@ -18,52 +18,57 @@
 
 {% block content %}
 
-<div class="parent">
-
-  <div class="col-l">
-    <img class="image" src="../{{ character.image }}">
-
-    <div>
-    <fieldset class="rating" style="float: left">
-      <h3 style="font-size: 18px">Rate {{ character.name }}: </h3>
-        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
-        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-      </fieldset>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2">
+      <img class="image-infopage" src="../{{ character.image }}">
+      <div>
+        <fieldset class="rating" style="float: left;">
+          <h3 style="font-size: 18px">Rate {{ character.name }}: </h3>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+          </fieldset>
+      </div>
     </div>
-
+    <div class="col-xs-9" style="margin-top: -25px;">
+      <h2 class="pg-title">{{ character.name }}</h2>
+      <p><b><i>Portrayed by :</i></b> {{ character.actor }}</p>
+      <p id="bio"><b><i>Character Summary: </i></b><br>{{ char_bio }}<p>
+    </div>
   </div>
-
-
-  <div class="col-r">
-    <h2 class="pg-title">{{ character.name }}</h2>
-    <p><b><i>Portrayed by:</i></b> {{ character.actor }}</p>
-    <p id="bio"><b><i>Character Summary:</i></b><br>{{ char_bio }}<p>
-  </div>  
-
 </div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <b>Connected to:</b><br>
+      <div>
+        {% for c in relationships %}
+          <a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+      <br>
+
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <b>Appears in:</b><br>
+      <div>
+        {% for series in appearances %}
+          <a href="/series/{{ series.name }}"><img class="char-link" src="../{{ series.image }}">}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
   
 
-
   <br><br>
-  <b>Connected to:</b><br>
-  <div>
-  {% for c in relationships %}
-      <a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a>
-    <br>
-  {% endfor %}
-  </div>
-
-  <br>
-
-  <b>Appears in:</b><br>
-  {% for series in appearances %}
-    <a href="/series/{{ series.name }}">{{ series.name }}</a>
-    <br>
-    {% endfor %}
+  
 
     <br>
 

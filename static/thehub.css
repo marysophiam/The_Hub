@@ -34,7 +34,7 @@ li a {
 }
 
 .readable {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 #connections {
@@ -88,10 +88,11 @@ b i {
 
 /* series.html */
 
-.image {
+.image-infopage {
   float: left;
-  width: 90%;
+  width: 100%;
   height: auto;
+/*  padding-top: 40px;*/
 }
 
 .parent {
@@ -127,9 +128,13 @@ b i {
 /* For D3/visualization template */
 
 svg {
-  margin-top: 50px;
+/*  margin-top: 50px;*/
   display: inline;
   position: absolute;
+}
+
+#graph {
+  margin-top: 50px;
 }
 
 #visualized {
