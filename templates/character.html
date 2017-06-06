@@ -1,21 +1,4 @@
 {% extends 'base.html' %}
-
-{% block html_head %}
-
-<style>
-.char-link {
-  width: 6.5%;
-  height: absolute;
-}
-
-.connection {
-  float: left;
-}
-</style>
-
-{% endblock %}
-
-
 {% block content %}
 
 <div class="container-fluid">
@@ -24,30 +7,43 @@
       <img class="image-infopage" src="../{{ character.image }}">
       <div>
         <fieldset class="rating" style="float: left;">
-          <h3 style="font-size: 18px">Rate {{ character.name }}: </h3>
-            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
-            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+          <h3 style="font-size: 18px;">Rate {{ character.name }}: </h3>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="So, so no bueno">1 star</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Lame sauce">2 stars</label>
             <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Sweet">4 stars</label>
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesomesauce">5 stars</label>
           </fieldset>
       </div>
     </div>
-    <div class="col-xs-9" style="margin-top: -25px;">
+    <div class="col-xs-8" style="margin-top: -25px; margin-left: 2%;">
       <h2 class="pg-title">{{ character.name }}</h2>
-      <p><b><i>Portrayed by :</i></b> {{ character.actor }}</p>
-      <p id="bio"><b><i>Character Summary: </i></b><br>{{ char_bio }}<p>
+      <h3>Portrayed by : {{ character.actor }}</h3>
+      <h3>Character Summary: </h3>
+      <p id="summary">{{ char_bio }}<p><br>
+      <b style="font-size: 22px; font-weight: bold; line-height: 36px;">Connected to:</b><br>
+      <div>
+        {% for c in relationships %}
+          <a href="/character/{{ c.name }}"><img class="char-series-link" src="../{{ c.image }}"></a>
+        {% endfor %}
+      </div>
+      <b style="font-size: 22px; font-weight: bold; line-height: 36px;">Appears in:</b><br>
+      <div>
+        {% for series in appearances %}
+          <a href="/series/{{ series.name }}"><img class="char-series-link" src="../{{ series.image }}">}</a>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-      <b>Connected to:</b><br>
+      <b style="font-size: 22px; font-weight: bold; line-height: 36px;">Connected to:</b><br>
       <div>
         {% for c in relationships %}
-          <a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a>
+          <a href="/character/{{ c.name }}"><img class="char-series-link" src="../{{ c.image }}"></a>
         {% endfor %}
       </div>
     </div>
@@ -56,22 +52,16 @@
 
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2">
-      <b>Appears in:</b><br>
+      <b style="font-size: 22px; font-weight: bold; line-height: 36px;">Appears in:</b><br>
       <div>
         {% for series in appearances %}
-          <a href="/series/{{ series.name }}"><img class="char-link" src="../{{ series.image }}">}</a>
+          <a href="/series/{{ series.name }}"><img class="char-series-link" src="../{{ series.image }}">}</a>
         {% endfor %}
       </div>
     </div>
   </div>
-</div>
+</div> -->
   
-
-  <br><br>
-  
-
-    <br>
-
 
   <!-- RATINGS SYSTEM
   TO DO:
@@ -100,7 +90,11 @@
   {% endif %}
   <p>{{ avg_rating }}</p>
  -->
-  <script>
+
+
+<!-- Not sure why this works commented out, but oookkk... -->
+
+  <!-- <script>
     $(function () {
    
     $("#rateYo").rateYo({
@@ -108,6 +102,6 @@
     });
    
   });
-  </script>
+  </script> -->
 
 {% endblock %}

@@ -92,7 +92,7 @@ function init_d3() {
     // move this to match slider & text
     // .attr("transform", "translate(" + (width - 20) + ",0)")
     .attr("transform", "translate(" + 850 + ",0)")
-    .attr("r", 10);
+    .attr("r", 11);
 
   svg.append("text")
     // x & y are location of text (above slider)

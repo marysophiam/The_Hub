@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <div class="parent">
-  <div class="col-l">
-    <img class="image" src="../{{ series.image }}">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2">
+      <img class="image-infopage" src="../{{ series.image }}">
+      <div>
+        <fieldset class="rating" style="float: left;">
+          <h3 style="font-size: 18px;">Rate {{ series.name }}: </h3>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="So, so no bueno">1 star</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Lame sauce">2 stars</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Sweet">4 stars</label>
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesomesauce">5 stars</label>
+          </fieldset>
+      </div>
+    </div>
+    <div class="col-xs-8" style="margin-top: -25px; margin-left: 2%;">
+      <h2 class="pg-title">{{ series.name }}</h2>
+      <h3>First aired : {{ series.date }}</h3>
+      <h3>Synopsis : </h3>
+      <p id="summary">{{ synopsis }}<p><br>
+      <b style="font-size: 22px; font-weight: bold; line-height: 36px;">Characters in this series :</b><br>
+      <div>
+        {% for c in characters %}
+          <a href="/character/{{ c.name }}"><img class="char-series-link" src="../{{ c.image }}"></a>
+        {% endfor %}
+      </div>
+    </div>
   </div>
-  <div class="col-r">
-    <h2 class="pg-title">{{ series.name }}</h2>
-    <p><b><i>Initial aired::</i></b> {{ series.date }}</p>
-    <p id="syn"><b><i>Synopsis:</i></b><br>{{ synopsis }}<p>
-  </div>  
 </div>
 
-  <b>Characters in this series:</b><br>
-  {% for c in characters %}
-    <a href="/character/{{ c.name }}">{{ c.name }}</a>
-    <br>
-  {% endfor %}
 
-  {% if "user_id" in session %}
+<!-- TO DO: Connect ratings to 5* display -->
+
+<!--   {% if "user_id" in session %}
     <h4>Series Rating:</h4>
     {% if user_rating %}
       <p>You rated this series {{ user_rating.score }} out of 5</p>
@@ -36,7 +52,19 @@
     {% endif %}
   {% endif %}
   <p>{{ avg_rating }}</p>
+ -->
 
-  <hr>
+
+ <!-- Not sure why this works commented out, but oookkk... -->
+
+  <!-- <script>
+    $(function () {
+   
+    $("#rateYo").rateYo({
+      rating: 3.6
+    });
+   
+  });
+  </script> -->
 
 {% endblock %}

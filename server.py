@@ -297,6 +297,12 @@ def show_d3():
     return render_template("connections.html")
 
 
+@app.route('/landing')
+def render_landing_page():
+
+    return render_template("landing.html")
+
+
 if __name__ == "__main__":
     # Have to set debug=True here, since it has to be True at the point that
     # the DebugToolbarExtension is invoked

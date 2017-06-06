@@ -1,0 +1,74 @@
+<!-- Does not inherit from base.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The Hub</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:600|Istok+Web:700|Play:700" rel="stylesheet">
+  <link rel="stylesheet" href="/static/the_hub.css">
+</head>
+
+<style>
+
+/* Just messing around with this right now...gotta up the CSS game! */
+
+body {
+  background-image: url("../static/img/tardis_interior.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #c2e1ed;
+  font-family: 'Play', 'Exo 2', sans-serif;
+}
+
+
+/* Needs rounded corners, a button to index page, major color changes (background, text), font changes (type, size) */
+.jumbotron {
+    margin-top: 6.5%;
+    margin-left: auto;
+    margin-right:auto;
+    width: 60%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #ffffff;
+    background-color: #000000;
+    text-align: center;
+    opacity: 0.94;
+    border-radius: 10px;
+    min-height: 525px;
+}
+
+.jumbotron h1 {
+  font-size: 148px;
+  font-weight: bolder;
+}
+
+.jumbotron h2 {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.btn-default {
+  background-color: #000000;
+  border: 0px;
+}
+
+.btn-default:hover {
+  background-color: #000000;
+}
+
+
+
+</style>
+
+<div class="jumbotron">
+  <h1>THE HUB</h1>
+  <h2>Connectivity in the Whoniverse</h2>
+  <br>
+  <div id="enter">
+    <a class="btn btn-default" href="/"><img src="../static/img/tardis_button.png"></a>
+  </div>
+</div>
+
+</html>

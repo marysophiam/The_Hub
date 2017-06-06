@@ -1,8 +1,10 @@
 /* base.html */
 
 body {
-  background-image: url("img/tardis_splash.jpg");
+  background-image: url("img/tardis_bkgrd.jpg");
   background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #c2e1ed;
   font-family: 'Play', 'Exo 2', sans-serif;
 }
@@ -10,14 +12,14 @@ body {
 .navbar-default {
   background-color: #406aff;
   color: #0a0f27;
-  height: 50px;
+  height: 54px;
   border: 0;
 }
 
 /* Can't change background color here, won't take, had to do it in individual navbar sub-div tags in the base template*/
 .navbar-brand {
-  font-size: 38px;
-  font-weight: bold;
+  font-size: 44px;
+  font-weight: bolder;
 }
 
 /* Can't change font color here, won't take, had to do it in individual <a> tags in the base template*/
@@ -28,17 +30,17 @@ li a {
 
 .headings {
   font-size: 56px;
-  font-weight: bold;
+  font-weight: bolder;
   text-align: center;
   color: #a3bbe0;
 }
 
 .readable {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 #connections {
-  font-size: 22px;
+  font-size: 26px;
 }
 
 
@@ -81,8 +83,16 @@ b i {
   font-size: 16px;
 }
 
+h3 {
+  line-height: 30px;
+}
+
+h4 {
+  line-height: 30px;
+}
+
 .pg-title {
-  font-size: 38px;
+  font-size: 50px;
   font-weight: bold;
 }
 
@@ -92,28 +102,23 @@ b i {
   float: left;
   width: 100%;
   height: auto;
+/*  margin-left: 2%;*/
 /*  padding-top: 40px;*/
 }
 
-.parent {
-      
+.char-series-link {
+  width: 7.2%;
+  height: absolute;
 }
 
-.col-l {
-  width: 30%;
-  /*padding-top: 1%;*/
-  margin-left: 2%;
+.connection {
+  float: left;
 }
 
-.col-r {
-  width: 70%;
-  /*padding-top: 1%;*/
-  margin-right: 13%
-}
 
 /* character.html */
 
-#bio {
+#summary {
   white-space: pre-wrap;
   text-align: justify;
 }
@@ -134,11 +139,11 @@ svg {
 }
 
 #graph {
-  margin-top: 50px;
+  margin-top: 55px;
 }
 
 #visualized {
-  font-size: 44px;
+  font-size: 48px;
   font-weight: bold;
 }
 
@@ -201,6 +206,7 @@ svg {
 
 .rating:not(:checked) > label {
   float:right;
+  margin-right: 18px;
   width:1em;
   padding:0 .1em;
   overflow:hidden;
