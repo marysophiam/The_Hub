@@ -4,13 +4,12 @@ body {
   background-image: url("img/tardis_splash.jpg");
   background-size: 100%;
   color: #c2e1ed;
-  posi
+  font-family: 'Play', 'Exo 2', sans-serif;
 }
 
-.navbar-default {background-image: url("img/tardis_splash.jpg");
-  background-size: 100%;
-  color: #c2e1ed;
+.navbar-default {
   background-color: #406aff;
+  color: #0a0f27;
   height: 50px;
   border: 0;
 }
@@ -18,29 +17,31 @@ body {
 /* Can't change background color here, won't take, had to do it in individual navbar sub-div tags in the base template*/
 .navbar-brand {
   font-size: 38px;
-  font-family: "sans-serif";
   font-weight: bold;
-  color: #0a0f27;
 }
 
 /* Can't change font color here, won't take, had to do it in individual <a> tags in the base template*/
 li a {
   font-size: 20px;
-  font-family: "sans-serif";
   font-weight: bold;
 }
 
 .headings {
-  font-size: 3.5em;
+  font-size: 56px;
   font-weight: bold;
   text-align: center;
-  font-family: "sans-serif";
   color: #a3bbe0;
+}
+
+.readable {
+  font-size: 16px;
 }
 
 #connections {
   font-size: 22px;
 }
+
+
 
 
 /* For carousel stuff */
@@ -58,8 +59,8 @@ li a {
 }
 
 .relative {
-  position:relative;
-  width:600px;
+  position: relative;
+  width: 600px;
 }
 
 .absolute-text {
@@ -67,7 +68,6 @@ li a {
   bottom: 0;
   color: #fff;
   font-size: 14px;
-  font-family: "sans-serif";
   font-weight: bold;
   padding: 40px 20px;
   width: 100%;
@@ -126,17 +126,16 @@ b i {
 
 /* For D3/visualization template */
 
-#visualized {
-  font-size: 44px;
-  font-weight: bold;
-}
-
 svg {
-  margin-left: 30%;
+  margin-top: 50px;
   display: inline;
   position: absolute;
 }
 
+#visualized {
+  font-size: 44px;
+  font-weight: bold;
+}
 
 .node {
   stroke: #fff;

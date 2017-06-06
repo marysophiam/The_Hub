@@ -32,7 +32,7 @@
         <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
       </fieldset>
-  </div>
+    </div>
 
   </div>
 
@@ -48,18 +48,14 @@
   
 
 
-
-
-
   <br><br>
-
   <b>Connected to:</b><br>
+  <div>
   {% for c in relationships %}
-    <div>
-    <div class="connection"><a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a></div>
-    </div>
+      <a href="/character/{{ c.name }}"><img class="char-link" src="../{{ c.image }}"></a>
     <br>
   {% endfor %}
+  </div>
 
   <br>
 

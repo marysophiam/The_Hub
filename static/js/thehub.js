@@ -3,13 +3,13 @@
 
 function init_d3() {
   var width = 900;
-  var height = 550;
+  var height = 560;
 
   var color = d3.scale.category10();
 
   var force = d3.layout.force()
-    .charge(-300)
-    .linkDistance(110)
+    .charge(-350)
+    .linkDistance(115)
     .size([width, height]);
 
   // domain is timeline; range is literal size of slider field  
@@ -23,7 +23,7 @@ function init_d3() {
     .y(x)
     .extent([0, 0]);
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#graph").append("svg")
     .attr("width", width)
     .attr("height", height);
 

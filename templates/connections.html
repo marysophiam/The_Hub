@@ -9,16 +9,42 @@
     init_d3();
     }
   </script>
+
+<style>
+  #wrapper {
+  display: flex;
+}
+#left {
+  flex: 0 0 30%;
+}
+#right {
+  flex: 1;
+}
+</style>
   
 {% endblock %}
 
 {% block content %}
 
-  <div id="vis-container" style="width: 22%; vertical-align: left;>
-  <h1 id="visualized">CHARACTER CONNECTIVITY<br>VISUALIZED</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3" style="padding-left: 3%;">
+        <h1 id="visualized">CHARACTER CONNECTIVITY<br>VISUALIZED</h1><br>
+        <p class="readable">
+          To watch how the Whoniverse characters connect with each other
+          as the timeline of the story progresses, drag the slider down.<br><br>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Proin euismod hendrerit est sed rutrum.<br>Quisque ornare sed quam id semper.<br>Integer et sagittis leo.<br>Nam accumsan orci quis fermentum commodo.<br>Duis iaculis porta lacinia.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Morbi vitae tortor maximus nisl feugiat pretium.<br>Quisque fringilla suscipit quam, non pretium erat interdum sit amet.<br>Donec vehicula pretium sem bibendum finibus.<br>Nunc sed accumsan enim.<br>Phasellus maximus convallis velit, convallis semper ante accumsan a.<br>Quisque velit purus, commodo feugiat elit cursus,<br>ullamcorper commodo metus.<br>Vivamus eget dui laoreet, malesuada nisl vel, egestas tortor.<br>Pellentesque convallis accumsan.</p>
-
+          Color Coding:<br>
+          Blue: Regenerations of The Doctor<br>
+          Orange: Companions of the Doctor<br>
+          Red: Torchwood Operatives<br>
+          Green: Captain Jack Harkness (crossover character--Companion &amp; 
+          head of Torchwood; described as "a fixed point in time &amp; space.")
+        </p>
+      </div>
+      <div class="col-xs-9" id="graph">
+      <div>
+    </div>
   </div>
 
 {% endblock %}
