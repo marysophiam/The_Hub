@@ -3,11 +3,11 @@
 
 *The Hub* is a fullstack web application designed to visualize the complex character connectivity in the fictional universe of the British sci-fi series Doctor Who (or, the "Whoniverse"), encompassing a period from the 2005 reboot of the show through its current timeline as of June 2017. The Hub draws data from a custom-designed database which models the connections between 22 major characters in 16 total seasons (or "series," in British terminology) of both Doctor Who and its main spin-off, Torchwood. After entering *The Hub* through a landing page, users are presented with two multi-item carousels--one for characters, and one for series--and can click through to the summary page for any individual character or series, which includes a brief summary of the characters/series, and characters/series connected to them. Users can also view a dynamic D3.js visualization of the character connectivity via a graph with a chronological slider that links characters together as their interactions are established in the Whoniverse timeline. Users of *The Hub* can also create an account (with an encrypted password), after which they are able to rate characters & series.
 
-![Landing Page](https://raw.githubusercontent.com/marysophiam/The_Hub/blob/master/static/readme/hub_screenshot_1.png)
-![Index Page](https://raw.githubusercontent.com/marysophiam/The_Hub/blob/master/static/readme/hub_screenshot_2.png)
-![Character Summary](https://raw.githubusercontent.com/marysophiam/The_Hub/blob/master/static/readme/hub_screenshot_3.png)
-![Visualization](https://raw.githubusercontent.com/marysophiam/The_Hub/blob/master/static/readme/hub_screenshot_4.png)
-![D3 Demo](https://raw.githubusercontent.com/marysophiam/The_Hub/blob/master/static/readme/marysophiam/The_Hub/blob/master/static/readme/D3_demo.gif)
+![Landing Page](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_1.png)
+![Index Page](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_2.png)
+![Character Summary](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_3.png)
+![Visualization](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_4.png)
+![D3 Demo](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/marysophiam/The_Hub/blob/master/static/readme/D3_demo.gif)
 
 #### Technology Stack
 * Python
