@@ -7,7 +7,7 @@
 ![Index Page](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_2.png)
 ![Character Summary](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_3.png)
 ![Visualization](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/hub_screenshot_4.png)
-![D3 Demo](https://raw.githubusercontent.com/marysophiam/master/static/readme/D3_demo.gif)
+![D3 Demo](https://raw.githubusercontent.com/marysophiam/The_Hub/master/static/readme/D3_demo.gif)
 
 #### Technology Stack
 * Python
