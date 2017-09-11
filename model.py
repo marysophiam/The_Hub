@@ -9,7 +9,7 @@ db = SQLAlchemy()
 
 
 # TO DO:
-# Separate models into discrete files (this file is getting reeeally long)
+# Separate models into discrete files (this file is getting really long)
 
 ########################################################################
 # Model definitions
@@ -34,7 +34,7 @@ class Character(db.Model):
         q = cls.query
         return q.all()
 
-    # ASK STEVE ABOUT COMBINING THESE 2 LIKE WE TALKED ABOUT...
+    # Combine by_id & by_ids in future refactoring?
 
     @classmethod
     def by_id(cls, char_id):
@@ -68,7 +68,7 @@ class Character(db.Model):
     #     # c.insert()
     #     return c
 
-    # Is this a @staticmethod ? (think so)
+    # Is this a @staticmethod ? (think so...)
     def relationships(self):
         # find relationships
 

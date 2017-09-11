@@ -17,7 +17,6 @@ app.secret_key = "TARDIS"
 app.jinja_env.undefined = StrictUndefined
 
 
-# Eventually links will be the carousel
 @app.route('/')
 def display_index():
     """Display index template."""
@@ -30,16 +29,16 @@ def display_index():
                             series=series)
 
 
-# This is the GET method; Dennis said I don't actually have to put "GET" in here
+# GET method
 @app.route('/character/<character_name>')
 def display_character(character_name):
     """Display character info template."""
 
+    # Using CLASS METHODS instead (to-do):
+
     # character_id = request.args.get("character")
     # character = Character.by_id(character_id)
 
-    # ^^^ Meh, there goes the pretty class method... :(
-    # Ask Steve how we can fix this all up.
     # Want all querying done in model file(s) only if possible!
 
     character = Character.query.filter_by(name=character_name).first()
